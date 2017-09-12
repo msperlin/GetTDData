@@ -200,6 +200,11 @@ read.TD.files <- function(dl.folder = 'TD Files',
     return(as.Date(x,'%d%m%y'))
   }
 
+  # fix names for NTN-B Principal
+  my.df$asset.code <- stringr::str_replace_all(my.df$asset.code, 
+                                               'NTN-B Princ ', 
+                                               'NTN-B Principal '  )
+  
   my.df$matur.date <- as.Date(sapply(my.df$asset.code,my.fct),origin = '1970-01-01' )
 
   return(my.df)
