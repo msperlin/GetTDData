@@ -41,4 +41,3 @@ download.TD.data(asset.codes = 'LTN', n.dl = 1)
 # The excel file should be available in folder 'TD Files' (default name)
 
 }
-

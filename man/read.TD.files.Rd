@@ -42,4 +42,3 @@ download.TD.data(asset.codes = 'LTN', dl.folder = dl.folder, n.dl = 1)
 my.df <- read.TD.files(dl.folder = dl.folder, maturity ='010117')
 }
 }
-

@@ -6,10 +6,10 @@ Authors@R: person("Marcelo", "Perlin", email = "marceloperlin@gmail.com", role =
 Description: Downloads and aggregates data for Brazilian government issued bonds directly from the website of Tesouro Direto <http://www.tesouro.fazenda.gov.br/tesouro-direto-balanco-e-estatisticas>.
 Depends:
     R (>= 3.2.3)
-Imports:stringr,stringi,readxl,utils,stats,curl,RCurl
+Imports: stringr,stringi,readxl,utils,stats,curl,RCurl
 License: GPL-2
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,
