@@ -1,0 +1,37 @@
+---
+title: "Downloading the Current Yield Curve"
+author: "Marcelo Perlin"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Downloading the Current Yield Curve}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The latest version of `GetTDData` offers function `get.yield.curve` to download the current Brazilian yield curve directly from [Anbima](http://www.anbima.com.br/est_termo/CZ.asp). The yield curve is a tool of financial analysts that show how, based on current prices of fixed income instruments, the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][http://www.investopedia.com/terms/y/yieldcurve.asp].
+
+# Usage
+
+```{r}
+library(GetTDData)
+
+df.yield <- get.yield.curve()  
+str(df.yield)
+```
+
+And we can plot it for the derised result:
+
+```{r}
+library(ggplot2)
+
+p <- ggplot(df.yield, aes(x=ref.date, y = value) ) +
+  geom_line(size=1) + geom_point() + facet_grid(~type, scales = 'free') + 
+  labs(title = paste0('The current Brazilian Yield Curve '),
+       subtitle = paste0('Date: ', df.yield$current.date[1]))     
+
+print(p)  
+  
+
+```
+

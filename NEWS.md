@@ -1,3 +1,7 @@
+### Version 1.3 (2017-09-14)
+  - Added function for downloading current yield curve from Anbima
+  - Fixed typos in vignettes
+
 ### Version 1.2.5 (2016-11-07)
   - Added the maturities of the instruments as an extra column in the dataframe
 
