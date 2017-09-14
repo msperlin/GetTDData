@@ -1,12 +1,14 @@
 ### Version 1.3 (2017-09-14)
   - Added function for downloading current yield curve from Anbima
   - Fixed typos in vignettes
+  - dev version now in github
+  - fixed bug for names of NTN-Principal
 
 ### Version 1.2.5 (2016-11-07)
   - Added the maturities of the instruments as an extra column in the dataframe
 
 ### Version 1.2.4 (2016-08-15)
-  - The package CHECK process no longer depends on the avaibility of Tesouro Direto website. All needed files for compilation are local
+  - The package CHECK process no longer depends on the avaibility of Tesouro Direto website. All needed files are now local
 
 ### Version 1.2.3 (2016-05-22)
   - Fixed bug in html download. Now using a new function and a new algorithm to try the download 10 times before throwing an error
