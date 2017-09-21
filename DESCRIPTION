@@ -8,6 +8,8 @@ Depends:
     R (>= 3.2.3)
 Imports: stringr,stringi,readxl,utils,stats,curl,RCurl,XML, bizdays, tidyr
 License: GPL-2
+BugReports: https://github.com/msperlin/GetTDData/issues
+URL: https://github.com/msperlin/GetTDData/
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr,
