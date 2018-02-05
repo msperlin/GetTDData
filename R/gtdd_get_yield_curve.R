@@ -25,6 +25,7 @@ get.yield.curve <- function(){
   df <- as.data.frame(lapply(df, FUN = function(x) as.character(x)),
                       stringsAsFactors = F)
 
+  n.biz.days <- NULL
   df <- tidyr::gather(data = df, 'type', value = 'value', -n.biz.days )
 
   df <- df[df$value!='',]
