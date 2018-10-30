@@ -4,9 +4,9 @@
 \alias{read.TD.files}
 \title{Reading excel files from Tesouro Direto}
 \usage{
-read.TD.files(dl.folder = "TD Files", asset.codes = NULL, maturity = NULL,
-  cols.to.import = c(1, 2, 4), col.names = c("ref.date", "yield.bid",
-  "price.bid"))
+read.TD.files(dl.folder = "TD Files", asset.codes = NULL,
+  maturity = NULL, cols.to.import = c(1, 2, 4),
+  col.names = c("ref.date", "yield.bid", "price.bid"))
 }
 \arguments{
 \item{dl.folder}{Folder with excel files from tesouro direto}

@@ -1,0 +1,7 @@
+pandoc: 1.19.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  gtdd-vignette_GetTDData: gtdd-vignette_GetTDData.html
+  gtdd-vignette_YieldCurve: gtdd-vignette_YieldCurve.html
+
