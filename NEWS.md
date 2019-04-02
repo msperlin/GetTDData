@@ -1,3 +1,7 @@
+## Version 1.4 (2019-04-02)
+  - Fixed bug in name importing of spreadsheets
+  - Prices and yield are now cleaned (no values equal to zero)
+  
 ## Version 1.3 (2017-09-14)
   - Added function for downloading current yield curve from Anbima
   - Fixed typos in vignettes

@@ -124,7 +124,9 @@ read.TD.files <- function(dl.folder = 'TD Files',
 
       # Read it with readxl (use capture.output to avoid "DEFINEDNAME:"  issue)
       # see: https://github.com/hadley/readxl/issues/111
-      utils::capture.output( temp.df <- readxl::read_excel(path = i.f,sheet = i.sheet) )
+      utils::capture.output( temp.df <- readxl::read_excel(path = i.f,
+                                                           sheet = i.sheet,
+                                                           skip = 1 ) )
 
       # make sure it is a dataframe (readxl has a different format as output)
       temp.df <- as.data.frame(temp.df)
@@ -156,7 +158,14 @@ read.TD.files <- function(dl.folder = 'TD Files',
 
       } else {
 
-        dateVec <- as.Date(as.numeric(temp.df$ref.date)-2,  origin="1900-01-01")
+        if (is.numeric(temp.df$ref.date)) {
+          #browser()
+          dateVec <- as.Date(as.numeric(temp.df$ref.date)-2,  origin="1900-01-01")
+
+        } else {
+          dateVec <- as.Date(temp.df$ref.date)
+        }
+
       }
 
       temp.df$ref.date <- dateVec
@@ -201,11 +210,21 @@ read.TD.files <- function(dl.folder = 'TD Files',
   }
 
   # fix names for NTN-B Principal
-  my.df$asset.code <- stringr::str_replace_all(my.df$asset.code, 
-                                               'NTN-B Princ ', 
+  my.df$asset.code <- stringr::str_replace_all(my.df$asset.code,
+                                               'NTN-B Princ ',
                                                'NTN-B Principal '  )
-  
-  my.df$matur.date <- as.Date(sapply(my.df$asset.code,my.fct),origin = '1970-01-01' )
+
+  my.df$matur.date <- as.Date(sapply(my.df$asset.code, my.fct),
+                              origin = '1970-01-01' )
+
+  # clean up zero value prices
+  col.classes <- sapply(my.df, class)
+  col.classes <- col.classes[col.classes == 'numeric']
+  col.to.change <- names(col.classes)
+  idx <- apply((as.matrix(my.df[, col.to.change]) == 0 ),
+               MARGIN = 1, any)
+
+  my.df <- my.df[!idx, ]
 
   return(my.df)
 }
