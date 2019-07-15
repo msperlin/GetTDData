@@ -10,6 +10,17 @@
 #' str(df.yield)
 get.yield.curve <- function(){
 
+  # message and return empty df
+  my.msg <- paste0('The previous Anbima site is no longer available. Data about ',
+                   'the yield curve cannot be scrapped from the site, meaning that ',
+                   'this function is no longer working. An alternative (and free) source of brazilian yield data is ',
+                   'being searched. If you know one, please drop an email at marceloperlin@gmail.com. \n\n',
+                   'Returning an empty dataframe.')
+  message(my.msg)
+
+  return(data.frame())
+
+  # rest of code (keep it for reference)
   my.l <- XML::readHTMLTable('http://www.anbima.com.br/est_termo/CZ.asp')
 
   # get date
