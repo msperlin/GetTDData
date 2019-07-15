@@ -1,4 +1,4 @@
-## Version 1.5 (2019-07-11)
+## Version 1.4.1 (2019-07-11)
   - Fixed bug in yield function (anbima site is down...). Need to find an alternative.
 
 ## Version 1.4 (2019-04-02)
