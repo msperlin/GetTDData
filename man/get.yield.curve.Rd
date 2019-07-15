@@ -10,7 +10,7 @@ get.yield.curve()
 A dataframe with information about the yield curve
 }
 \description{
-Downloads and parses information about the current Brazilian yield curve from \url{http://www.anbima.com.br/est_termo/CZ.asp}
+Downloads and parses information about the current Brazilian yield curve.
 }
 \examples{
 df.yield <- get.yield.curve()
