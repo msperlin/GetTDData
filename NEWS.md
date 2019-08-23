@@ -1,3 +1,6 @@
+## Version 1.4.2 (2019-08-23)
+  - Found an alternative address from Anbima. (see [issue #1](https://github.com/msperlin/GetTDData/issues/1))
+  
 ## Version 1.4.1 (2019-07-11)
   - Fixed bug in yield function (anbima site is down...). Need to find an alternative.
 
