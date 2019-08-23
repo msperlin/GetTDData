@@ -1,3 +1,6 @@
+## Version 1.4.1 (2019-07-11)
+  - Fixed bug in yield function (anbima site is down...). Need to find an alternative.
+
 ## Version 1.4 (2019-04-02)
   - Fixed bug in name importing of spreadsheets
   - Prices and yield are now cleaned (no values equal to zero)

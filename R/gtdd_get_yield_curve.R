@@ -1,6 +1,6 @@
 #' Gets the current yield curve
 #'
-#' Downloads and parses information about the current Brazilian yield curve from \url{http://www.anbima.com.br/est_termo/CZ.asp}
+#' Downloads and parses information about the current Brazilian yield curve.
 #'
 #' @return A dataframe with information about the yield curve
 #' @export
@@ -10,7 +10,23 @@
 #' str(df.yield)
 get.yield.curve <- function(){
 
+  # message and return empty df
+  my.msg <- paste0('The previous Anbima site is no longer available. Data about ',
+                   'the yield curve cannot be scrapped from the site, meaning that ',
+                   'this function is no longer working. An alternative (and free) source of brazilian yield data is ',
+                   'being searched. If you know one, please drop an email at marceloperlin@gmail.com. \n\n',
+                   'Returning an empty dataframe.')
+  message(my.msg)
+
+  return(data.frame())
+
+  # rest of code (keep it for reference)
   my.l <- XML::readHTMLTable('http://www.anbima.com.br/est_termo/CZ.asp')
+  #my.l <- XML::readHTMLTable('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
+
+  # NEW CODE
+  #read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp') %>%
+    #html_table(fill = TRUE)
 
   # get date
   temp <- my.l[[6]]
