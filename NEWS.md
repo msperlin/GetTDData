@@ -1,4 +1,4 @@
-## Version 1.4.2 (2019-08-23)
+## Version 1.4.2 (2019-10-01)
   - Found an alternative address from Anbima. (see [issue #1](https://github.com/msperlin/GetTDData/issues/1))
   
 ## Version 1.4.1 (2019-07-11)

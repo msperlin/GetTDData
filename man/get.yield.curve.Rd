@@ -13,6 +13,8 @@ A dataframe with information about the yield curve
 Downloads and parses information about the current Brazilian yield curve.
 }
 \examples{
+\dontrun{
 df.yield <- get.yield.curve()
 str(df.yield)
+}
 }

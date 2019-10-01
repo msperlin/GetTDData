@@ -7,8 +7,10 @@
 #' @import rvest xml2
 #'
 #' @examples
+#' \dontrun{
 #' df.yield <- get.yield.curve()
 #' str(df.yield)
+#' }
 get.yield.curve <- function(){
 
   # message and return empty df (FIXED)
