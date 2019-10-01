@@ -1,7 +1,7 @@
 #' Downloads data of Brazilian government bonds directly from the website
 #'
 #' This function looks into the tesouro direto website
-#' (http://www.tesouro.fazenda.gov.br/tesouro-direto-balanco-e-estatisticas) and
+#' (https://www.tesourodireto.com.br/titulos/historico-de-precos-e-taxas.htm) and
 #' downloads all of the files containing prices and yields of government bonds.
 #' You can use input asset.codes to restrict the downloads to specific bonds
 #'

@@ -182,10 +182,6 @@ read.TD.files <- function(dl.folder = 'TD Files',
   my.df <- my.df[stats::complete.cases(my.df), ]
 
   # fix names (TD website is a mess!!)
-
-  #browser()
-
-  unique(my.df$asset.code)
   my.df$asset.code <- stringr::str_replace_all(my.df$asset.code,
                                                stringr::fixed('NTNBP'),
                                                'NTN-B Principal')
