@@ -65,7 +65,7 @@ download.TD.data <- function(asset.codes = 'LTN',
 
   }
 
-  base.url <- "http://sisweb.tesouro.gov.br/apex/f?p=2031:2::::::"
+  base.url <- "https://www.tesourodireto.com.br/lumis/api/rest/documentos/lumgetdata/list.json?lumReturnFields=documentFile,title,description,tags&lumMaxRows=999"
 
   # # read html (OLD CODE, keep it for reference)
   #
@@ -81,17 +81,21 @@ download.TD.data <- function(asset.codes = 'LTN',
   i.try <- 1
   while (TRUE){
     cat('\nDownloading html page (attempt = ', i.try,'|',max.tries,')',sep = '')
-    html.code <- RCurl::getURL(base.url,
-                               .opts = RCurl::curlOptions(cookiejar="",
-                                                          followlocation = TRUE ))
 
-    # making sure the enconding is correct
+    json_code <- RCurl::getURL(
+      base.url,
+      httpheader = c(
+        Accept = "application/json",
+        Referer = "https://www.tesourodireto.com.br/titulos/historico-de-precos-e-taxas.htm"
+      ),
+      ssl.verifypeer = FALSE,
+      .opts = RCurl::curlOptions(cookiejar = "", followlocation = TRUE)
+    )
 
-    html.code <- stringi::stri_enc_toutf8(html.code)
 
     # check if html.code makes sense. If not, download it again
 
-    if ( (!is.character(html.code))|(stringr::str_length(html.code)<10) ){
+    if ( (!is.character(json_code))|(stringr::str_length(json_code)<10) ){
       cat(' - Error in downloading html page. Trying again..')
     } else {
       break()
@@ -106,54 +110,38 @@ download.TD.data <- function(asset.codes = 'LTN',
     Sys.sleep(1)
   }
 
+  json <- jsonlite::fromJSON(json_code)
+
   # fixing links strings
 
-  my.links <-
-    stringr::str_extract_all(html.code,pattern = 'href=\"(.*?)\" download')[[1]]
-  my.links <-
-    stringr::str_replace_all(my.links,'href=\"',replacement = '')
-  my.links <-
-    stringr::str_replace_all(my.links,'\" download',replacement = '')
+  my.links <- json$rows$documentFile$downloadHref
 
   # find names in links
 
-  my.names <-
-    stringr::str_extract_all(html.code,pattern = 'download>(.*?)</a>')[[1]]
-  my.names <-
-    stringr::str_replace_all(my.names ,'download>',replacement = '')
-  my.names <-
-    stringr::str_replace_all(my.names ,'</a>',replacement = '')
+  my.names <- stringr::str_replace_all(json$rows$documentFile$name, "_", " ")
+  my.names <- stringr::str_match(my.names, "[A-Za-z- ]+")
+  my.names <- stringr::str_replace(my.names, "^historico", "")
+  my.names <- stringr::str_replace(my.names, "^NTNB", "NTN-B")
+  my.names <- stringr::str_replace(my.names, "^NTNC", "NTN-C")
+  my.names <- stringr::str_replace(my.names, "^NTNF", "NTN-F")
+  my.names <- stringr::str_replace(my.names, "^NTN-BPrincipal", "NTN-B Principal")
+  my.names <- stringr::str_replace(my.names, "^NTN-CPrincipal", "NTN-C Principal")
+  my.names <- stringr::str_trim(my.names)
 
   # finding years from website
 
-  first.year <- 2002
-  year.now <- as.numeric(format(Sys.Date(),'%Y'))
-  seq.years <- seq(from =   year.now, to = first.year)
-
-  str.now <- sprintf('<span>%i - </span>',seq.years)
-
-  idx <- stringr::str_locate(string = html.code,str.now)
-  idx <- idx[,1]
-
-  idx <- c(as.numeric(idx), nchar(html.code))
-
-  sub.strings <- stringr::str_sub(html.code,start=idx[1:(length(idx)-1)],end = idx[2:(length(idx))])
-
-  my.fct <- function(x,sub.strings){
-    idx <- which(stringr::str_detect(sub.strings, stringr::fixed(x) ))
-    return(idx)
-  }
-
-  idx.years <- sapply(X = my.links, FUN = my.fct, sub.strings=sub.strings)
-
-  my.years <- seq.years[idx.years]
+  my.years <- stringr::str_match(json$rows$documentFile$name, "\\d{4}")
 
   # find asset code in names
 
   if (!is.null(asset.codes)) {
 
     idx <- my.names %in% asset.codes
+    my.links <- my.links[idx]
+    my.names <- my.names[idx]
+    my.years <- my.years[idx]
 
+    idx <- order(my.names, my.years)
     my.links <- my.links[idx]
     my.names <- my.names[idx]
     my.years <- my.years[idx]
@@ -164,24 +152,22 @@ download.TD.data <- function(asset.codes = 'LTN',
 
   n.links <- length(my.links)
 
-  if (!is.null(n.dl)){
-    my.links <-my.links[1:n.dl]
+  if (!is.null(n.dl)) {
+    my.links <- my.links[1:n.dl]
   }
 
   my.c <- 1
   for (i.link in my.links) {
 
-    out.file <-
-      paste0(dl.folder,'/',paste0(my.names[my.c],'_',my.years[my.c], '.xls'))
-
-    i.link <- paste0('http://sisweb.tesouro.gov.br/apex/', i.link)
+    .fname <- paste0(my.names[my.c], '_', my.years[my.c], '.xls')
+    out.file <- file.path(dl.folder, .fname)
 
     cat(paste0('\nDownloading file ', out.file, ' (',my.c, '-', n.links, ')'))
 
     # check if file exists and if it does not contain the current year
     # in its name (thats how tesouro direto stores new data)
 
-    test.current.year <- stringr::str_detect(out.file,format(Sys.Date(),'%Y'))
+    test.current.year <- stringr::str_detect(out.file, format(Sys.Date(),'%Y'))
 
     if (file.exists(out.file)&(!test.current.year)&(!do.overwrite)){
 
@@ -195,10 +181,10 @@ download.TD.data <- function(asset.codes = 'LTN',
     cat(' Downloading...')
     utils::download.file(
       url = i.link,
-      method = 'internal',
-      mode = 'wb',
+      method = "auto",
+      mode = "wb",
       destfile = out.file,
-      quiet = T )
+      quiet = T)
 
     my.c <- my.c + 1
 
