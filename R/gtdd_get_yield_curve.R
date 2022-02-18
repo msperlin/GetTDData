@@ -27,8 +27,8 @@ get.yield.curve <- function(){
 
   # NEW CODE
   my_html <- read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
-  my_tab <-  my_html %>%
-    rvest::html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
+  my_tab <-  my_html |>
+    html_nodes(xpath = '//*[@id="ETTJs"]/table') |>
     html_table(fill = TRUE )
 
   df_yc <- my_tab[[1]]
@@ -76,7 +76,14 @@ get.yield.curve <- function(){
 
   df_yc$n.biz.days <- as.numeric(df_yc$n.biz.days)
   df_yc$value <- as.numeric(df_yc$value)
-  df_yc$ref.date <- bizdays::add.bizdays(date_now, df_yc$n.biz.days)
+
+  cal <- bizdays::create.calendar("Brazil/ANBIMA",
+                         holidays = bizdays::holidaysANBIMA,
+                         weekdays=c("saturday", "sunday"))
+
+
+  df_yc$ref.date <- bizdays::add.bizdays(date_now, df_yc$n.biz.days,
+                                         cal = cal)
   df_yc$current.date <- date_now
 
   return(df_yc)

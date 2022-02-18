@@ -1,7 +1,7 @@
 #' Downloads data of Brazilian government bonds directly from the website
 #'
 #' This function looks into the tesouro direto website
-#' (https://www.tesourodireto.com.br/titulos/historico-de-precos-e-taxas.htm) and
+#' (https://www.tesourodireto.com.br/) and
 #' downloads all of the files containing prices and yields of government bonds.
 #' You can use input asset.codes to restrict the downloads to specific bonds
 #'
@@ -54,8 +54,8 @@ download.TD.data <- function(asset.codes = 'LTN',
 
   # check if names names sense
 
+  possible.names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
   if (!is.null(asset.codes)){
-    possible.names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
 
     idx <- asset.codes %in% possible.names
 
@@ -63,103 +63,37 @@ download.TD.data <- function(asset.codes = 'LTN',
       stop(paste(c('Input asset.codes not valid. It should be one or many of the following: ', possible.names), collapse = ', '))
     }
 
+    # replace space by _
+    asset.codes <- stringr::str_replace_all(asset.codes, " ", "_")
+
+  } else {
+    asset.codes <- possible.names
   }
 
-  base.url <- "https://www.tesourodireto.com.br/lumis/api/rest/documentos/lumgetdata/list.json?lumReturnFields=documentFile,title,description,tags&lumMaxRows=999"
+  first_year = 2005L
+  last_year = as.integer(format(Sys.Date(), "%Y"))
+  vec_years = first_year:last_year
 
-  # # read html (OLD CODE, keep it for reference)
-  #
-  # html.code <- RCurl::getURL(base.url,
-  #                             .opts = RCurl::curlOptions(cookiejar="",
-  #                                                        useragent = "Mozilla/5.0",
-  #                                                        followlocation = TRUE ))
-
-  # read html code (trying max.tries)
-
-  max.tries <- 10
-
-  i.try <- 1
-  while (TRUE){
-    cat('\nDownloading html page (attempt = ', i.try,'|',max.tries,')',sep = '')
-
-    json_code <- RCurl::getURL(
-      base.url,
-      httpheader = c(
-        Accept = "application/json",
-        Referer = "https://www.tesourodireto.com.br/titulos/historico-de-precos-e-taxas.htm"
-      ),
-      ssl.verifypeer = FALSE,
-      .opts = RCurl::curlOptions(cookiejar = "", followlocation = TRUE)
-    )
-
-
-    # check if html.code makes sense. If not, download it again
-
-    if ( (!is.character(json_code))|(stringr::str_length(json_code)<10) ){
-      cat(' - Error in downloading html page. Trying again..')
-    } else {
-      break()
-    }
-
-    if (i.try==max.tries){
-      stop('Reached maximum number of attempts to download html code. Exiting now...')
-    }
-
-    i.try <- i.try + 1
-
-    Sys.sleep(1)
-  }
-
-  json <- jsonlite::fromJSON(json_code)
-
-  # fixing links strings
-
-  my.links <- json$rows$documentFile$downloadHref
-
-  # find names in links
-
-  my.names <- stringr::str_replace_all(json$rows$documentFile$name, "_", " ")
-  my.names <- stringr::str_match(my.names, "[A-Za-z- ]+")
-  my.names <- stringr::str_replace(my.names, "^historico", "")
-  my.names <- stringr::str_replace(my.names, "^NTNB", "NTN-B")
-  my.names <- stringr::str_replace(my.names, "^NTNC", "NTN-C")
-  my.names <- stringr::str_replace(my.names, "^NTNF", "NTN-F")
-  my.names <- stringr::str_replace(my.names, "^NTN-BPrincipal", "NTN-B Principal")
-  my.names <- stringr::str_replace(my.names, "^NTN-CPrincipal", "NTN-C Principal")
-  my.names <- stringr::str_trim(my.names)
-
-  # finding years from website
-
-  my.years <- stringr::str_match(json$rows$documentFile$name, "\\d{4}")
-
-  # find asset code in names
-
-  if (!is.null(asset.codes)) {
-
-    idx <- my.names %in% asset.codes
-    my.links <- my.links[idx]
-    my.names <- my.names[idx]
-    my.years <- my.years[idx]
-
-    idx <- order(my.names, my.years)
-    my.links <- my.links[idx]
-    my.names <- my.names[idx]
-    my.years <- my.years[idx]
-
-  }
+  base_url <- "https://cdn.tesouro.gov.br/sistemas-internos/apex/producao/sistemas/sistd/{vec_years}/{asset.codes}_{vec_years}.xls"
+  file_grid <- tidyr::expand_grid(asset.codes, vec_years) |>
+    dplyr::mutate(url = stringr::str_glue(base_url))
 
   # proceed with download loop
-
+  my.links <- file_grid$url
   n.links <- length(my.links)
 
   if (!is.null(n.dl)) {
-    my.links <- my.links[1:n.dl]
+    file_grid <- file_grid[1:n.dl, ]
   }
 
   my.c <- 1
-  for (i.link in my.links) {
+  for (i in 1:nrow(file_grid)) {
 
-    .fname <- paste0(my.names[my.c], '_', my.years[my.c], '.xls')
+    i.link <- file_grid$url[i]
+    my.name <- file_grid$asset.codes[i]
+    my.year <- file_grid$vec_years[i]
+
+    .fname <- paste0(my.name, '_', my.year, '.xls')
     out.file <- file.path(dl.folder, .fname)
 
     cat(paste0('\nDownloading file ', out.file, ' (',my.c, '-', n.links, ')'))

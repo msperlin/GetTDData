@@ -217,6 +217,9 @@ read.TD.files <- function(dl.folder = 'TD Files',
   col.classes <- sapply(my.df, class)
   col.classes <- col.classes[col.classes == 'numeric']
   col.to.change <- names(col.classes)
+
+  # remove yield columns
+  col.to.change <- col.to.change[!stringr::str_detect(col.to.change, "yield")]
   idx <- apply((as.matrix(my.df[, col.to.change]) == 0 ),
                MARGIN = 1, any)
 

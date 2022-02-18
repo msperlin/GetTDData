@@ -4,8 +4,13 @@
 \alias{download.TD.data}
 \title{Downloads data of Brazilian government bonds directly from the website}
 \usage{
-download.TD.data(asset.codes = "LTN", dl.folder = "TD Files",
-  do.clean.up = F, do.overwrite = F, n.dl = NULL)
+download.TD.data(
+  asset.codes = "LTN",
+  dl.folder = "TD Files",
+  do.clean.up = F,
+  do.overwrite = F,
+  n.dl = NULL
+)
 }
 \arguments{
 \item{asset.codes}{Strings that identify the assets (1 or more assets) in the
@@ -28,7 +33,7 @@ TRUE if successful
 }
 \description{
 This function looks into the tesouro direto website
-(https://www.tesourodireto.com.br/titulos/historico-de-precos-e-taxas.htm) and
+(https://www.tesourodireto.com.br/) and
 downloads all of the files containing prices and yields of government bonds.
 You can use input asset.codes to restrict the downloads to specific bonds
 }
