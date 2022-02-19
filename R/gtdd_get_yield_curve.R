@@ -22,9 +22,6 @@ get.yield.curve <- function(){
   # message(my.msg)
   #return(data.frame())
 
-  # OLD code (keep it for reference)
-  #my.l <- XML::readHTMLTable('http://www.anbima.com.br/est_termo/CZ.asp')
-
   # NEW CODE
   my_html <- read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
   my_tab <-  my_html |>

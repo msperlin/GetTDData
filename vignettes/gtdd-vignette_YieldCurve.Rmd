@@ -11,7 +11,7 @@ vignette: >
 
 **BE AWARE that this functionality is currently unavailable due to changes in Anbima's site. A workaround is currently being searched..**
 
-The latest version of `GetTDData` offers function `get.yield.curve` to download the current Brazilian yield curve directly from Anbima. The yield curve is a tool of financial analysts that show, based on current prices of fixed income instruments, how the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][http://www.investopedia.com/terms/y/yieldcurve.asp].
+The latest version of `GetTDData` offers function `get.yield.curve` to download the current Brazilian yield curve directly from Anbima. The yield curve is a tool of financial analysts that show, based on current prices of fixed income instruments, how the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][https://www.investopedia.com/terms/y/yieldcurve.asp].
 
 # Usage
 

@@ -123,7 +123,7 @@ read.TD.files <- function(dl.folder = 'TD Files',
       cat(paste('\n    Reading Sheet ', i.sheet, sep = ''))
 
       # Read it with readxl (use capture.output to avoid "DEFINEDNAME:"  issue)
-      # see: https://github.com/hadley/readxl/issues/111
+      # see: https://github.com/hadley/readxl/issues/111/
       utils::capture.output( temp.df <- readxl::read_excel(path = i.f,
                                                            sheet = i.sheet,
                                                            skip = 1 ) )

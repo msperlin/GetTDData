@@ -1,10 +1,10 @@
 ## Version 1.4.3 (2022-02-18)
-  - Major change in urls from Tesouro Direto (See [issue #5](https://github.com/msperlin/GetTDData/pull/5))
+  - Major change in urls from Tesouro Direto (See [issue #5](https://github.com/msperlin/GetTDData/pull/5/))
   - Fixed issue with get.yield.curve() 
-  - Fixed issue with yields equal to 0 (see [issue #3](https://github.com/msperlin/GetTDData/issues/3))
+  - Fixed issue with yields equal to 0 (see [issue #3](https://github.com/msperlin/GetTDData/issues/3/))
   
 ## Version 1.4.2 (2019-10-01)
-  - Found an alternative address from Anbima. (see [issue #1](https://github.com/msperlin/GetTDData/issues/1))
+  - Found an alternative address from Anbima. (see [issue #1](https://github.com/msperlin/GetTDData/issues/1/))
   
 ## Version 1.4.1 (2019-07-11)
   - Fixed bug in yield function (anbima site is down...). Need to find an alternative.
