@@ -1,3 +1,6 @@
+## Version 1.4.4 (2022-03-02)
+  - Fixed issue in cran check for oldrel (use of new pipeline operator, which is not available prior to R < 4.1)
+
 ## Version 1.4.3 (2022-02-18)
   - Major change in urls from Tesouro Direto (See [issue #5](https://github.com/msperlin/GetTDData/pull/5/))
   - Fixed issue with get.yield.curve() 

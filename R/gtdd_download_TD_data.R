@@ -75,7 +75,7 @@ download.TD.data <- function(asset.codes = 'LTN',
   vec_years = first_year:last_year
 
   base_url <- "https://cdn.tesouro.gov.br/sistemas-internos/apex/producao/sistemas/sistd/{vec_years}/{asset.codes}_{vec_years}.xls"
-  file_grid <- tidyr::expand_grid(asset.codes, vec_years) |>
+  file_grid <- tidyr::expand_grid(asset.codes, vec_years) %>%
     dplyr::mutate(url = stringr::str_glue(base_url))
 
   # proceed with download loop

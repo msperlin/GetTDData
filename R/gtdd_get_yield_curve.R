@@ -24,8 +24,8 @@ get.yield.curve <- function(){
 
   # NEW CODE
   my_html <- read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
-  my_tab <-  my_html |>
-    html_nodes(xpath = '//*[@id="ETTJs"]/table') |>
+  my_tab <-  my_html %>%
+    html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
     html_table(fill = TRUE )
 
   df_yc <- my_tab[[1]]
