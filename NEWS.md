@@ -1,3 +1,6 @@
+## Version 1.4.5 (2022-03-18)
+  - Fixed issue in but related to NTN-principal
+
 ## Version 1.4.4 (2022-03-02)
   - Fixed issue in cran check for oldrel (use of new pipeline operator, which is not available prior to R < 4.1)
 

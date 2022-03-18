@@ -63,12 +63,12 @@ download.TD.data <- function(asset.codes = 'LTN',
       stop(paste(c('Input asset.codes not valid. It should be one or many of the following: ', possible.names), collapse = ', '))
     }
 
-    # replace space by _
-    asset.codes <- stringr::str_replace_all(asset.codes, " ", "_")
-
   } else {
     asset.codes <- possible.names
   }
+
+  # replace space by _
+  asset.codes <- stringr::str_replace_all(asset.codes, " ", "_")
 
   first_year = 2005L
   last_year = as.integer(format(Sys.Date(), "%Y"))
