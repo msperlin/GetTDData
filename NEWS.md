@@ -1,5 +1,6 @@
-## Version 1.4.5 (2022-03-18)
-  - Fixed issue in but related to NTN-principal
+## Version 1.4.5 (2022-04-06)
+  - Fixed issue in download related to product NTN-principal [issue #8](https://github.com/msperlin/GetTDData/issues/8)
+  - removed "Date" from DESCRIPTION file (seems to be standard now)
 
 ## Version 1.4.4 (2022-03-02)
   - Fixed issue in cran check for oldrel (use of new pipeline operator, which is not available prior to R < 4.1)

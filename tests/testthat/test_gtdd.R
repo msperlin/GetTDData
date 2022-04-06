@@ -11,7 +11,10 @@ test_that(desc = 'Test of download function',{
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
-  my.flag <- download.TD.data(asset.codes = 'LTN', dl.folder = dl.folder, n.dl = 1)
+  my.flag <- download.TD.data(asset.codes = 'LTN',
+                              dl.folder = dl.folder,
+                              n.dl = 5  # keep it short
+                              )
 
   expect_equal(my.flag , TRUE)
   }
