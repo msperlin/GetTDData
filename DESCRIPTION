@@ -11,8 +11,10 @@ BugReports: https://github.com/msperlin/GetTDData/issues/
 URL: https://github.com/msperlin/GetTDData/
 LazyData: false
 RoxygenNote: 7.1.2
-Suggests: knitr,
+Suggests: 
+    knitr,
     rmarkdown,
     testthat,
-    ggplot2
+    ggplot2,
+    covr
 VignetteBuilder: knitr

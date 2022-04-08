@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/msperlin/GetTDData/branch/master/graph/badge.svg)](https://app.codecov.io/gh/msperlin/GetTDData?branch=master)
+  <!-- badges: end -->
+
 # Package `GetTDData`
 
 Information regarding prices and  yields of bonds issued by the Brazilian government can be downloaded manually as excel files from the [Tesouro Direto website](https://www.tesourodireto.com.br/). However, it can be painful to aggregate all of this data into something useful as the files don't have an uniform format and are all divided by year and asset code.

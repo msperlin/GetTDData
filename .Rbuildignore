@@ -3,3 +3,6 @@
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
 .github
+^codecov\.yml$
+^\.github$
+codemeta.json
