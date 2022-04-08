@@ -1,5 +1,5 @@
 ---
-title: "Downloading Data from Tesouro Direto"
+title: "How to use GetTDData"
 author: "Marcelo Perlin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

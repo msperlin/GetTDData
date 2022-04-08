@@ -1,6 +1,6 @@
 ## Version 1.5 (2022-04-XX)
   - improved github actions by adding codecov, pkgdown and LICENSE
-
+  - added new tests and functions
 
 ## Version 1.4.5 (2022-04-06)
   - Fixed issue in download related to product NTN-principal [issue #8](https://github.com/msperlin/GetTDData/issues/8)
