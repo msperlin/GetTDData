@@ -14,8 +14,11 @@ Package `GetTDData` makes the process of importing data from Tesouro direto much
 # Installation
 
 ```
-# from CRAN
+# from CRAN (stable version)
 install.package('GetTDData')
+
+# from github (development version)
+devtools::install_github('msperlin/GetTDData')
 ```
 
 # How to use `GetTDData`
