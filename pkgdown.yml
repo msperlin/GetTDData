@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   gtdd-vignette_GetTDData: gtdd-vignette_GetTDData.html
   gtdd-vignette_YieldCurve: gtdd-vignette_YieldCurve.html
-last_built: 2022-04-08T12:22Z
+last_built: 2022-04-08T12:29Z
 urls:
   reference: https://msperlin.github.io/GetTDData/reference
   article: https://msperlin.github.io/GetTDData/articles
