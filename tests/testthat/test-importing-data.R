@@ -15,9 +15,11 @@ test_that(desc = 'Test of download function #1',{
 
 
   my.flag <- download.TD.data(asset.codes = 'LTN',
-                              dl.folder = dl.folder,
-                              n.dl = 5  # keep it short
-                              )
+                              dl.folder = dl.folder)
+
+  # run it again to check existing files
+  my.flag <- download.TD.data(asset.codes = 'LTN',
+                              dl.folder = dl.folder)
 
   expect_equal(my.flag , TRUE)
   }
@@ -62,7 +64,7 @@ test_that(desc = 'Test of read function #02',{
   }
 
   returned.rows <- nrow(read.TD.files(asset.codes = "LTN",
-                                      maturity = NULL,
+                                      maturity = '010116',
                                       dl.folder = dl.folder ))
 
   expect_true(returned.rows > 0)

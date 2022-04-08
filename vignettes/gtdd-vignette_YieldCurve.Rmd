@@ -9,13 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-**BE AWARE that this functionality is currently unavailable due to changes in Anbima's site. A workaround is currently being searched..**
-
 The latest version of `GetTDData` offers function `get.yield.curve` to download the current Brazilian yield curve directly from Anbima. The yield curve is a tool of financial analysts that show, based on current prices of fixed income instruments, how the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][https://www.investopedia.com/terms/y/yieldcurve.asp].
 
 # Usage
 
-```{r, eval=FALSE}
+```{r}
 library(GetTDData)
 
 df.yield <- get.yield.curve()  
@@ -24,7 +22,7 @@ str(df.yield)
 
 And we can plot it for the derised result:
 
-```{r, eval=FALSE}
+```{r}
 library(ggplot2)
 
 p <- ggplot(df.yield, aes(x=ref.date, y = value) ) +
@@ -32,8 +30,6 @@ p <- ggplot(df.yield, aes(x=ref.date, y = value) ) +
   labs(title = paste0('The current Brazilian Yield Curve '),
        subtitle = paste0('Date: ', df.yield$current.date[1]))     
 
-print(p)  
-  
-
+print(p)
 ```
 

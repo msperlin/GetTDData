@@ -58,7 +58,7 @@ read.TD.files <- function(dl.folder = 'TD Files',
   # check if names names sense
 
   if (!is.null(asset.codes)){
-    possible.names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
+    possible.names <- get_td_names()
 
     idx <- asset.codes %in% possible.names
 
