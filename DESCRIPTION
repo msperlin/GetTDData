@@ -6,9 +6,10 @@ Description: Downloads and aggregates data for Brazilian government issued bonds
 Depends:
     R (>= 4.0.0)
 Imports: stringr, readxl, utils, stats, curl, bizdays, tidyr, rvest, xml2, dplyr
-License: GPL-2
+License: MIT + file LICENSE
 BugReports: https://github.com/msperlin/GetTDData/issues/
-URL: https://github.com/msperlin/GetTDData/
+URL: https://github.com/msperlin/GetTDData/,
+    https://msperlin.github.io/GetTDData/
 LazyData: false
 RoxygenNote: 7.1.2
 Suggests: 
