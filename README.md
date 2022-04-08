@@ -23,4 +23,4 @@ devtools::install_github('msperlin/GetTDData')
 
 # How to use `GetTDData`
 
-See documentatino page at [https://msperlin.github.io/GetTDData/](https://msperlin.github.io/GetTDData/).
+See documentation page at [https://msperlin.github.io/GetTDData/](https://msperlin.github.io/GetTDData/).
