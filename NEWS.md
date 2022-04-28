@@ -1,6 +1,7 @@
-## Version 1.5 (2022-04-XX)
+## Version 1.5.0 (2022-04-28)
   - improved github actions by adding codecov, pkgdown and LICENSE
   - added new tests and functions
+  - removed arguments "maturity" and "asset.codes" from `read.TD.files` function
 
 ## Version 1.4.5 (2022-04-06)
   - Fixed issue in download related to product NTN-principal [issue #8](https://github.com/msperlin/GetTDData/issues/8)

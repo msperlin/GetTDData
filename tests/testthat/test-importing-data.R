@@ -5,6 +5,7 @@ library(GetTDData)
 
 dl.folder <- file.path(tempdir(), "TESTING_TD")
 dir.create(dl.folder)
+n_dl <- 3
 
 test_that(desc = 'Test of download function #1',{
 
@@ -15,11 +16,13 @@ test_that(desc = 'Test of download function #1',{
 
 
   my.flag <- download.TD.data(asset.codes = 'LTN',
-                              dl.folder = dl.folder)
+                              dl.folder = dl.folder,
+                              n.dl = n_dl)
 
   # run it again to check existing files
   my.flag <- download.TD.data(asset.codes = 'LTN',
-                              dl.folder = dl.folder)
+                              dl.folder = dl.folder,
+                              n.dl = n_dl)
 
   expect_equal(my.flag , TRUE)
   }
@@ -35,7 +38,7 @@ test_that(desc = 'Test of download function #2',{
 
   my.flag <- download.TD.data(asset.codes = NULL,
                               dl.folder = dl.folder,
-                              n.dl = 5  # keep it short
+                              n.dl = n_dl  # keep it short
   )
 
   expect_equal(my.flag , TRUE)
@@ -50,8 +53,7 @@ test_that(desc = 'Test of read function #01',{
     testthat::skip_on_cran()
   }
 
-  returned.rows <- nrow(read.TD.files(maturity = NULL,
-                                      dl.folder = dl.folder ))
+  returned.rows <- nrow(read.TD.files(dl.folder = dl.folder ))
 
   expect_equal(returned.rows > 0, TRUE)
 } )
@@ -63,11 +65,19 @@ test_that(desc = 'Test of read function #02',{
     testthat::skip_on_cran()
   }
 
-  returned.rows <- nrow(read.TD.files(asset.codes = "LTN",
-                                      maturity = '010116',
-                                      dl.folder = dl.folder ))
+  available_assets <- get_td_names()
 
-  expect_true(returned.rows > 0)
+  for (i_asset in available_assets) {
+    download.TD.data(asset.codes = i_asset,
+                     dl.folder = dl.folder,
+                     n.dl = n_dl)
+
+    df_temp <- read.TD.files(dl.folder = dl.folder)
+
+    expect_true(nrow(df_temp) > 0)
+  }
+
+
 } )
 
 cat('\nDeleting test folder')

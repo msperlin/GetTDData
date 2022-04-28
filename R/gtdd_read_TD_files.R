@@ -2,13 +2,7 @@
 #'
 #' Reads files downloaded by \code{\link{download.TD.data}}
 #'
-#' @param asset.codes Strings that identify the assets (1 or more assets) in the
-#'   names of the excel files. E.g. asset.codes = 'LTN'. When set to NULL, it
-#'   will download all available assets
 #' @param dl.folder Folder with excel files from tesouro direto
-#' @param maturity A character vector with the desired maturities (in format
-#'   ddmmyy, e.g. "010116"). If set to NULL, will download all maturities of
-#'   all asset codes
 #' @param cols.to.import Columns (numeric) to import from excel files (open and
 #'   check the columns of the excel file from tesouro direto for details)
 #' @param col.names Names of columns in final data.frame (same size as
@@ -23,23 +17,20 @@
 #' dl.folder ='TD Files'
 #'
 #' \dontrun{
-#' download.TD.data(asset.codes = 'LTN', dl.folder = dl.folder, n.dl = 1)
+#' download.TD.data(dl.folder = dl.folder, n.dl = 1)
 #'
-#' my.df <- read.TD.files(dl.folder = dl.folder, maturity ='010117')
+#' my.df <- read.TD.files(dl.folder = dl.folder)
 #' }
 read.TD.files <- function(dl.folder = 'TD Files',
-                          asset.codes = NULL,
-                          maturity = NULL,
                           cols.to.import = c(1,2,4),
                           col.names =  c('ref.date','yield.bid','price.bid')){
 
   # Error checking
 
   if (!is.character(dl.folder)) stop('Argument dl.folder should be a character')
-  if (!is.null(maturity)) if(!is.character(maturity)) stop('Argument maturity should be a character or NULL')
   if (!is.numeric(cols.to.import)) stop('Argument cols.to.import should be numeric ')
 
-  if(!any(cols.to.import==1)){
+  if(!any(cols.to.import == 1)) {
     stop('The first column represents the dates in the excel files. You should include it in cols.to.import')
   }
 
@@ -55,19 +46,6 @@ read.TD.files <- function(dl.folder = 'TD Files',
     stop(paste('Cant find folder', dl.folder))
   }
 
-  # check if names names sense
-
-  if (!is.null(asset.codes)){
-    possible.names <- get_td_names()
-
-    idx <- asset.codes %in% possible.names
-
-    if (!any(idx)){
-      stop(paste(c('Input asset.codes not valid. It should be one or many of the following: ', possible.names), collapse = ', '))
-    }
-
-  }
-
   cat('\nReading xls data and saving to data.frame')
 
   my.f <- list.files(dl.folder, full.names = T)
@@ -76,47 +54,18 @@ read.TD.files <- function(dl.folder = 'TD Files',
     stop(paste('Cant file xlsx files at',dl.folder))
   }
 
-  # check if asset.code exists and only reads the files that matter
-
-  if (!is.null(asset.codes)) {
-    idx <- logical(length = length(my.f))
-    for (i.asset in asset.codes) {
-      temp.idx <- stringr::str_detect(string = my.f,
-                                      pattern = i.asset)
-      idx <- idx | temp.idx
-    }
-
-    my.f <- my.f[idx]
-
-  }
 
   my.df <- data.frame()
   for (i.f in my.f){
 
     cat(paste('\n Reading File = ', i.f, sep = ''))
 
-   # Use capture.output so that no message "DEFINEDNAME" is shown
-   # Details in: https://github.com/hadley/readxl/issues/82#issuecomment-166767220
+    # Use capture.output so that no message "DEFINEDNAME" is shown
+    # Details in: https://github.com/hadley/readxl/issues/82#issuecomment-166767220
 
-   utils::capture.output( sheets <- readxl::excel_sheets(i.f) )
-
-    # find maturities
-    if (!is.null(maturity)){
-
-      idx <- logical(length = length(sheets))
-      for (i.matur in maturity){
-
-        idx.temp <- stringr::str_detect(string = sheets, pattern = i.matur)
-        idx <- idx|idx.temp
-
-      }
-
-      sheets <- sheets[idx]
-
-    }
-
-    if (length(sheets)==0) cat(paste('\n    Cant find maturities in file ',i.f ))
-
+    utils::capture.output({
+      sheets <- readxl::excel_sheets(i.f)
+    })
 
     for (i.sheet in sheets) {
 
@@ -124,15 +73,16 @@ read.TD.files <- function(dl.folder = 'TD Files',
 
       # Read it with readxl (use capture.output to avoid "DEFINEDNAME:"  issue)
       # see: https://github.com/hadley/readxl/issues/111/
-      utils::capture.output( temp.df <- readxl::read_excel(path = i.f,
-                                                           sheet = i.sheet,
-                                                           skip = 1 ) )
+      utils::capture.output({
+        temp.df <- readxl::read_excel(path = i.f,
+                                      sheet = i.sheet,
+                                      skip = 1 )
+      })
 
       # make sure it is a dataframe (readxl has a different format as output)
       temp.df <- as.data.frame(temp.df)
 
       # control for columns
-
       if (max(cols.to.import)>ncol(temp.df)){
         stop(paste0('In file ',i.f, ' the number of columns is lower than ',max(cols.to.import),
                     '. Please supply values of cols.to.import that make sense.'))
@@ -159,7 +109,7 @@ read.TD.files <- function(dl.folder = 'TD Files',
       } else {
 
         if (is.numeric(temp.df$ref.date)) {
-          #browser()
+
           dateVec <- as.Date(as.numeric(temp.df$ref.date)-2,  origin="1900-01-01")
 
         } else {
@@ -171,11 +121,8 @@ read.TD.files <- function(dl.folder = 'TD Files',
       temp.df$ref.date <- dateVec
       temp.df$asset.code <- i.sheet
 
-
-
       my.df <- rbind(my.df, temp.df)
     }
-
 
   }
 

@@ -11,7 +11,8 @@ vignette: >
 
 Information regarding prices and  yields of bonds issued by the Brazilian government can be downloaded manually as excel files from the [Tesouro Direto website](https://www.tesourodireto.com.br/). However, it can be painful to aggregate all of this data into something useful as the files don't have an uniform format and are all divided by year and asset code.
 
-Package GetTDData makes the process of importing data from Tesouro direto much easier. All you need is the name of fixed income assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F) and the desired dates of maturity (e.g. 2016-01-01). 
+Package GetTDData makes the process of importing data from Tesouro direto much easier. All you need is the name of fixed income assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F). 
+
 
 ## How to use GetTDData
 
@@ -23,26 +24,30 @@ In order to get the data, all you need to do is to run the following code in R:
 library(GetTDData)
 
 asset.codes <- 'LTN'   # Identifier of assets 
-maturity <- '010116'  # Maturity date as string (ddmmyy)
 cache_folder <- paste0(tempdir(), '/TD_cache')
 
 my.flag <- download.TD.data(asset.codes = asset.codes, 
                             dl.folder = cache_folder)
 
-my.df <- read.TD.files(asset.codes = asset.codes, 
-                       dl.folder = cache_folder,
-                       maturity = maturity,)
-
-
+my.df <- read.TD.files(dl.folder = cache_folder)
 ```
 
 Let's plot the prices to check if the code worked: 
 
 ```{r plot.prices, fig.width=7, fig.height=2.5}
 library(ggplot2)
+library(dplyr)
 
-p <- ggplot(data = my.df, aes(x = as.Date(ref.date), y = price.bid, color = asset.code))
-p <- p + geom_line(size = 1) + scale_x_date() + labs(title = '', x = 'Dates')
+# filter single LTN 
+LTN <- my.df %>%
+  filter(matur.date == as.Date("2020-01-01") )
+
+p <- ggplot(data = LTN, 
+            aes(x = as.Date(ref.date), 
+                y = price.bid, 
+                color = asset.code)) + 
+  geom_line(size = 1) + scale_x_date() + labs(title = '', x = 'Dates')
+
 print(p)
 ```
 
@@ -50,47 +55,36 @@ As expected, the prices from this bond will converge to its face value, 1000 R$,
 
 
 ```{r plot.yield, fig.width=7, fig.height=2.5}
-p <- ggplot(data = my.df, aes(x = as.Date(ref.date), y = yield.bid, color = asset.code))
-p <- p + geom_line(size = 1) + scale_x_date()+ labs(title = '', x = 'Dates' )
+p <- ggplot(data = LTN, 
+            aes(x = as.Date(ref.date), 
+                y = yield.bid, 
+                color = asset.code)) + 
+   geom_line(size = 1) + 
+  scale_x_date() + 
+  labs(title = '', 
+       x = 'Dates')
+
 print(p)
-
 ```
 
-The functions in `GetTDData` also work with multiple arguments as `asset.codes` and `maturity`. Suppose we wanted to look at the prices of all available maturities for bonds of type LTN. All we need to do is to add the value `NULL` to the argument `maturity`:
-
-```{r example2}
-library(GetTDData)
-library(ggplot2)
-
-asset.codes <- 'LTN'   # Name of asset
-maturity <- NULL      # = NULL, downloads all maturities
-
-# download data
-my.flag <- download.TD.data(asset.codes = asset.codes, 
-                            dl.folder = cache_folder,
-                            do.clean.up = F)
-
-# reads data
-my.df <- read.TD.files(asset.codes = asset.codes, 
-                       dl.folder = cache_folder,
-                       maturity = maturity)
-
-```
-
-Once the data is downloaded, we can plot the prices of the different debt contracts:
+By default, `GetTDData` downloads all available data from the website. Suppose we wanted to look at the prices of all available maturities for bonds of type LTN. Since the data is already downloaded, all we need to do is to plot the prices and yields of the different debt contracts:
 
 ```{r example2_plots, fig.width=7, fig.height=2.5}
 # plot data (prices)
 p <- ggplot(data = my.df, 
             aes(x = as.Date(ref.date), y = price.bid, color = asset.code)) + 
-  geom_line() + scale_x_date() + labs(title = '', x = 'Dates', y = 'Prices' )
+  geom_line() + 
+  scale_x_date() + 
+  labs(title = '', x = 'Dates', y = 'Prices' )
 
 print(p)
 
 # plot data (yields)
 p <- ggplot(data = my.df, 
             aes(x = as.Date(ref.date), y = yield.bid, color = asset.code)) + 
-  geom_line() + scale_x_date() + labs(title = '', x = 'Dates', y = 'Yields' )
+  geom_line() + 
+  scale_x_date() + 
+  labs(title = '', x = 'Dates', y = 'Yields' )
 
 print(p)
 
