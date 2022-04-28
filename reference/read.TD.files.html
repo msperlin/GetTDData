@@ -60,8 +60,6 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read.TD.files</span><span class="op">(</span>
   dl.folder <span class="op">=</span> <span class="st">"TD Files"</span>,
-  asset.codes <span class="op">=</span> <span class="cn">NULL</span>,
-  maturity <span class="op">=</span> <span class="cn">NULL</span>,
   cols.to.import <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,
   col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ref.date"</span>, <span class="st">"yield.bid"</span>, <span class="st">"price.bid"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
@@ -71,14 +69,6 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dl.folder</dt>
 <dd><p>Folder with excel files from tesouro direto</p></dd>
-<dt>asset.codes</dt>
-<dd><p>Strings that identify the assets (1 or more assets) in the
-names of the excel files. E.g. asset.codes = 'LTN'. When set to NULL, it
-will download all available assets</p></dd>
-<dt>maturity</dt>
-<dd><p>A character vector with the desired maturities (in format
-ddmmyy, e.g. "010116"). If set to NULL, will download all maturities of
-all asset codes</p></dd>
 <dt>cols.to.import</dt>
 <dd><p>Columns (numeric) to import from excel files (open and
 check the columns of the excel file from tesouro direto for details)</p></dd>
@@ -98,9 +88,9 @@ cols.to.import)</p></dd>
 <span class="r-in"><span class="va">dl.folder</span> <span class="op">=</span><span class="st">'TD Files'</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="download.TD.data.html">download.TD.data</a></span><span class="op">(</span>asset.codes <span class="op">=</span> <span class="st">'LTN'</span>, dl.folder <span class="op">=</span> <span class="va">dl.folder</span>, n.dl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="download.TD.data.html">download.TD.data</a></span><span class="op">(</span>dl.folder <span class="op">=</span> <span class="va">dl.folder</span>, n.dl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">my.df</span> <span class="op">&lt;-</span> <span class="fu">read.TD.files</span><span class="op">(</span>dl.folder <span class="op">=</span> <span class="va">dl.folder</span>, maturity <span class="op">=</span><span class="st">'010117'</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">my.df</span> <span class="op">&lt;-</span> <span class="fu">read.TD.files</span><span class="op">(</span>dl.folder <span class="op">=</span> <span class="va">dl.folder</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
@@ -113,7 +103,7 @@ cols.to.import)</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>

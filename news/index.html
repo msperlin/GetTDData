@@ -52,9 +52,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5" id="version-15-2022-04-xx">Version 1.5 (2022-04-XX)<a class="anchor" aria-label="anchor" href="#version-15-2022-04-xx"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.5.0" id="version-150-2022-04-28">Version 1.5.0 (2022-04-28)<a class="anchor" aria-label="anchor" href="#version-150-2022-04-28"></a></h2>
 <ul><li>improved github actions by adding codecov, pkgdown and LICENSE</li>
 <li>added new tests and functions</li>
+<li>removed arguments “maturity” and “asset.codes” from <code>read.TD.files</code> function</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.5" id="version-145-2022-04-06">Version 1.4.5 (2022-04-06)<a class="anchor" aria-label="anchor" href="#version-145-2022-04-06"></a></h2><p class="text-muted">CRAN release: 2022-04-06</p>
@@ -66,8 +67,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.4" id="version-144-2022-03-02">Version 1.4.4 (2022-03-02)<a class="anchor" aria-label="anchor" href="#version-144-2022-03-02"></a></h2><p class="text-muted">CRAN release: 2022-03-02</p>
-<ul><li>Fixed issue in cran check for oldrel (use of new pipeline operator, which is not available prior to R &lt; 4.1)</li>
-</ul></div>
+<ul><li>Fixed issue in cran check for oldrel (use of new pipeline operator, which is not available prior to R &lt; 4.1)</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.3" id="version-143-2022-02-18">Version 1.4.3 (2022-02-18)<a class="anchor" aria-label="anchor" href="#version-143-2022-02-18"></a></h2><p class="text-muted">CRAN release: 2022-02-21</p>
 <ul><li>Major change in urls from Tesouro Direto (See <a href="https://github.com/msperlin/GetTDData/pull/5/" class="external-link">issue </a><a href="https://github.com/msperlin/GetTDData/issues/5" class="external-link">#5</a>)</li>
@@ -76,12 +76,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.2" id="version-142-2019-10-01">Version 1.4.2 (2019-10-01)<a class="anchor" aria-label="anchor" href="#version-142-2019-10-01"></a></h2><p class="text-muted">CRAN release: 2019-10-01</p>
-<ul><li>Found an alternative address from Anbima. (see <a href="https://github.com/msperlin/GetTDData/issues/1/" class="external-link">issue </a><a href="https://github.com/msperlin/GetTDData/issues/1" class="external-link">#1</a>)</li>
-</ul></div>
+<ul><li>Found an alternative address from Anbima. (see <a href="https://github.com/msperlin/GetTDData/issues/1/" class="external-link">issue </a><a href="https://github.com/msperlin/GetTDData/issues/1" class="external-link">#1</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.1" id="version-141-2019-07-11">Version 1.4.1 (2019-07-11)<a class="anchor" aria-label="anchor" href="#version-141-2019-07-11"></a></h2><p class="text-muted">CRAN release: 2019-07-15</p>
-<ul><li>Fixed bug in yield function (anbima site is down…). Need to find an alternative.</li>
-</ul></div>
+<ul><li>Fixed bug in yield function (anbima site is down…). Need to find an alternative.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4" id="version-14-2019-04-02">Version 1.4 (2019-04-02)<a class="anchor" aria-label="anchor" href="#version-14-2019-04-02"></a></h2><p class="text-muted">CRAN release: 2019-04-02</p>
 <ul><li>Fixed bug in name importing of spreadsheets</li>
@@ -96,16 +94,13 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.5" id="version-125-2016-11-07">Version 1.2.5 (2016-11-07)<a class="anchor" aria-label="anchor" href="#version-125-2016-11-07"></a></h2><p class="text-muted">CRAN release: 2016-11-08</p>
-<ul><li>Added the maturities of the instruments as an extra column in the dataframe</li>
-</ul></div>
+<ul><li>Added the maturities of the instruments as an extra column in the dataframe</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.4" id="version-124-2016-08-15">Version 1.2.4 (2016-08-15)<a class="anchor" aria-label="anchor" href="#version-124-2016-08-15"></a></h2><p class="text-muted">CRAN release: 2016-08-16</p>
-<ul><li>The package CHECK process no longer depends on the avaibility of Tesouro Direto website. All needed files are now local</li>
-</ul></div>
+<ul><li>The package CHECK process no longer depends on the avaibility of Tesouro Direto website. All needed files are now local</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.3" id="version-123-2016-05-22">Version 1.2.3 (2016-05-22)<a class="anchor" aria-label="anchor" href="#version-123-2016-05-22"></a></h2><p class="text-muted">CRAN release: 2016-05-24</p>
-<ul><li>Fixed bug in html download. Now using a new function and a new algorithm to try the download 10 times before throwing an error</li>
-</ul></div>
+<ul><li>Fixed bug in html download. Now using a new function and a new algorithm to try the download 10 times before throwing an error</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.2" id="version-122-2016-05-22">Version 1.2.2 (2016-05-22)<a class="anchor" aria-label="anchor" href="#version-122-2016-05-22"></a></h2><p class="text-muted">CRAN release: 2016-05-22</p>
 <ul><li>The html structure of the Tesouro Website has changed and that resulted in CHECK errors in the package. This update fixed it.</li>
@@ -127,9 +122,7 @@
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Added a new option <span class="cf">for</span> overwriting or not the downloaded excel <span class="fu">files</span> (saves a lot of time <span class="cf">for</span> large batch downloads<span class="sc">!</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> Fixed typos and improved the text <span class="cf">in</span> the vignette</span></code></pre></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="version-100---initial-version-2016-02-10">Version 1.0.0 - Initial version (2016-02-10)<a class="anchor" aria-label="anchor" href="#version-100---initial-version-2016-02-10"></a></h2>
-</div>
+    <div class="section level2"><h2 class="pkg-version" data-toc-text="1.0.0" id="version-100---initial-version-2016-02-10">Version 1.0.0 - Initial version (2016-02-10)<a class="anchor" aria-label="anchor" href="#version-100---initial-version-2016-02-10"></a></h2></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -139,7 +132,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
