@@ -74,10 +74,12 @@ get.yield.curve <- function(){
   df_yc$n.biz.days <- as.numeric(df_yc$n.biz.days)
   df_yc$value <- as.numeric(df_yc$value)
 
-  cal <- bizdays::create.calendar("Brazil/ANBIMA",
-                         holidays = bizdays::holidaysANBIMA,
-                         weekdays=c("saturday", "sunday"))
+  bizdays::load_builtin_calendars()
+  my_holidays <- bizdays::calendars()[["Brazil/ANBIMA"]]$holidays
 
+  cal <- bizdays::create.calendar("Brazil/ANBIMA",
+                         holidays = my_holidays,
+                         weekdays=c("saturday", "sunday"))
 
   df_yc$ref.date <- bizdays::add.bizdays(date_now, df_yc$n.biz.days,
                                          cal = cal)
