@@ -1,3 +1,6 @@
+## Version 1.5.1 (2022-05-11)
+  - implemented change for bizdays::holidaysANBIMA (see [issue 10](https://github.com/msperlin/GetTDData/issues/10))
+  
 ## Version 1.5.0 (2022-04-28)
   - improved github actions by adding codecov, pkgdown and LICENSE
   - added new tests and functions
