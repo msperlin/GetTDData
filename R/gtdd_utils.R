@@ -8,3 +8,15 @@ get_td_names <- function() {
 
   return(possible.names)
 }
+
+#' Returns cache directory
+#'
+#' @return a path
+#'
+#' @noRd
+get_cache_folder <- function() {
+
+  cache_dir <- fs::path_temp("TD_temp")
+
+  return(cache_dir)
+}

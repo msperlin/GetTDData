@@ -16,7 +16,7 @@ Package GetTDData makes the process of importing data from Tesouro direto much e
 
 ## How to use GetTDData
 
-Suppose you need financial data (prices and yields) for a bond of type LTN with a maturity date equal to 2016-01-01. This bullet bond is the most basic debt contract the Brazilian government issues. It does not pay any value (coupon) during its lifetime and will pay 1000 R$ at maturity.
+Suppose you need financial data (prices and yields) for a bond of type LTN with a maturity (end of contract) at 2023-01-01. This bullet bond is the most basic debt contract the Brazilian government issues. It does not pay any value (coupon) during its lifetime and will pay 1000 R$ at maturity.
 
 In order to get the data, all you need to do is to run the following code in R:
 
@@ -38,9 +38,16 @@ Let's plot the prices to check if the code worked:
 library(ggplot2)
 library(dplyr)
 
-# filter single LTN 
+# filter  LTN 
+my_asset_code <- "LTN 010123"
+first_date <- as.Date("2015-01-01")
+
+my.df <- my.df %>%
+  filter(ref.date >= first_date)
+
 LTN <- my.df %>%
-  filter(matur.date == as.Date("2020-01-01") )
+  filter(asset.code  ==  my_asset_code,
+         ref.date >= first_date)
 
 p <- ggplot(data = LTN, 
             aes(x = as.Date(ref.date), 
@@ -51,7 +58,7 @@ p <- ggplot(data = LTN,
 print(p)
 ```
 
-As expected, the prices from this bond will converge to its face value, 1000 R$, at the maturity date (2016-01-01). We can also look at its time-varying annual yield:
+As expected, the prices from this bond will converge to its face value, 1000 R$, at the maturity date. We can also look at its time-varying annual yield:
 
 
 ```{r plot.yield, fig.width=7, fig.height=2.5}
@@ -59,7 +66,7 @@ p <- ggplot(data = LTN,
             aes(x = as.Date(ref.date), 
                 y = yield.bid, 
                 color = asset.code)) + 
-   geom_line(size = 1) + 
+  geom_line(size = 1) + 
   scale_x_date() + 
   labs(title = '', 
        x = 'Dates')

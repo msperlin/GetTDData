@@ -28,9 +28,9 @@
 #' # The excel file should be available in folder 'TD Files' (default name)
 #'
 download.TD.data <- function(asset.codes = 'LTN',
-                             dl.folder = 'TD Files',
-                             do.clean.up = F,
-                             do.overwrite = F,
+                             dl.folder = get_cache_folder(),
+                             do.clean.up = FALSE,
+                             do.overwrite = FALSE,
                              n.dl = NULL) {
   # check folder
 
@@ -113,17 +113,30 @@ download.TD.data <- function(asset.codes = 'LTN',
     #browser()
 
     cat(' Downloading...')
-    utils::download.file(
-      url = i.link,
-      method = "auto",
-      mode = "wb",
-      destfile = out.file,
-      quiet = T)
+
+    try({
+      utils::download.file(
+        url = i.link,
+        method = "auto",
+        mode = "wb",
+        destfile = out.file,
+        quiet = T)
+    })
+
+    # sleep for a bit..
+    Sys.sleep(0.5)
+
+    if (!file.exists(out.file)) {
+      message("Cant find downloaded file.. probably a download error. Maybe your should check your internet connection?",
+              '\nReturning FALSE flag')
+
+      return(FALSE)
+    }
 
     my.c <- my.c + 1
 
   }
 
-  return(T)
+  return(TRUE)
 
 }

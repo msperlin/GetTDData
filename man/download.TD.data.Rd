@@ -6,9 +6,9 @@
 \usage{
 download.TD.data(
   asset.codes = "LTN",
-  dl.folder = "TD Files",
-  do.clean.up = F,
-  do.overwrite = F,
+  dl.folder = get_cache_folder(),
+  do.clean.up = FALSE,
+  do.overwrite = FALSE,
   n.dl = NULL
 )
 }

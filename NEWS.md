@@ -1,3 +1,6 @@
+## Version 1.5.2 (2023-01-01)
+  - it now fails gracefuly when download of files fails.
+  
 ## Version 1.5.1 (2022-05-11)
   - implemented change for bizdays::holidaysANBIMA (see [issue 10](https://github.com/msperlin/GetTDData/issues/10))
   
