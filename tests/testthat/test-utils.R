@@ -7,3 +7,13 @@ test_that('Test of get.yield.curve()',{
 })
 
 
+test_that('Test cache path function',{
+
+  cache <- get_cache_folder()
+
+  fs::dir_create(cache)
+
+  expect_true(fs::is_dir(cache))
+})
+
+
