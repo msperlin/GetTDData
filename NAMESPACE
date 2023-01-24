@@ -3,5 +3,6 @@
 export(download.TD.data)
 export(get.yield.curve)
 export(read.TD.files)
+export(td_get)
 import(rvest)
 import(xml2)

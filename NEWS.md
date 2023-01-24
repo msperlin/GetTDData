@@ -1,3 +1,6 @@
+## Version 1.5.3 (2023-01-24)
+  - deprecated functions download.TD.data() and read.TD.files(). Both are replaced by td_get()
+  
 ## Version 1.5.2 (2023-01-01)
   - it now fails gracefuly when download of files fails.
   

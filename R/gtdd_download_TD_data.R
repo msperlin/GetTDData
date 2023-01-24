@@ -32,8 +32,18 @@ download.TD.data <- function(asset.codes = 'LTN',
                              do.clean.up = FALSE,
                              do.overwrite = FALSE,
                              n.dl = NULL) {
-  # check folder
 
+
+  # 20230124 DEPRECATION
+  my_message <- stringr::str_glue(
+    "This function is deprecated and will be removed soon.",
+    " Please use the new function, td_get()."
+  )
+  lifecycle::deprecate_soft(when = "v1.5.3 (2023-01-24)",
+                            what = "GetTDData::download.TD.Data()",
+                            details = c(i = my_message) )
+
+  # check folder
   if (!dir.exists(dl.folder)) {
     warning(paste('Folder ', dl.folder, 'was not found. Creating a it..'))
     dir.create(dl.folder)

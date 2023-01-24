@@ -25,8 +25,16 @@ read.TD.files <- function(dl.folder = 'TD Files',
                           cols.to.import = c(1,2,4),
                           col.names =  c('ref.date','yield.bid','price.bid')){
 
-  # Error checking
+  # 20230124 DEPRECATION
+  my_message <- stringr::str_glue(
+    "This function is deprecated and will be removed soon.",
+    " Please use the new function, td_get()."
+  )
+  lifecycle::deprecate_soft(when = "v1.5.3 (2023-01-24)",
+                            what = "GetTDData::read.TD.files()",
+                            details = c(i = my_message) )
 
+  # Error checking
   if (!is.character(dl.folder)) stop('Argument dl.folder should be a character')
   if (!is.numeric(cols.to.import)) stop('Argument cols.to.import should be numeric ')
 
