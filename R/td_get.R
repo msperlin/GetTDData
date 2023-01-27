@@ -8,28 +8,21 @@
 #' @param asset_codes Strings that identify the assets (1 or more assets) in the
 #'   names of the excel files. E.g. asset_codes = 'LTN'. When set to NULL, it
 #'   will download all available assets
+#' @param first_year first year of data (minimum of 2015)
+#' @param last_year first year of data
 #' @param dl_folder Name of folder to save excel files from tesouro direto (will
 #'   create if it does not exists)
-#' @param do_clean_up Clean up folder before downloading? (TRUE or FALSE)
-#' @param do_overwrite Overwrite excel files? (TRUE or FALSE). If FALSE, will
-#'   only download the new data for the current year
-#' @param n_dl Sets how many files to download from the website. Used only to
-#'   decrease CRAN CHECK time. The default value is NULL (downloads all files)
 #'
 #' @return TRUE if successful
 #' @export
 #'
 #' @examples
-#' # only download file where string LTN is found
-#' # (only 1 file for simplicity)
 #' \dontrun{
-#' download.TD.data(asset_codes = 'LTN', n_dl = 1)
+#' td_get("LTN", 2020, 2022)
 #' }
-#' # The excel file should be available in folder 'TD Files' (default name)
-#'
 td_get <- function(asset_codes = 'LTN',
                    first_year = 2005,
-                   last_year = lubridate::year(Sys.Date()),
+                   last_year = as.numeric(format(Sys.Date(), "%Y")),
                    dl_folder = get_cache_folder()) {
 
   # check folder
@@ -49,7 +42,6 @@ td_get <- function(asset_codes = 'LTN',
   }
 
   # check if names names sense
-
   possible_names <- get_td_names()
   if (!is.null(asset_codes)){
 
@@ -90,38 +82,9 @@ td_get <- function(asset_codes = 'LTN',
   df_td <- purrr::map_dfr(local_files,
                           read_td_file)
 
-
-
   df_td <- df_td[stats::complete.cases(df_td), ]
 
-  # fix names (TD website is a mess!!)
-  df_td$asset_code <- stringr::str_replace_all(df_td$asset_code,
-                                               stringr::fixed('NTNBP'),
-                                               'NTN-B Principal')
-
-  df_td$asset_code <- stringr::str_replace_all(df_td$asset_code,
-                                               stringr::fixed('NTNF'),
-                                               'NTN-F')
-
-  df_td$asset_code <- stringr::str_replace_all(df_td$asset_code,
-                                               stringr::fixed('NTNB'),
-                                               'NTN-B')
-
-  df_td$asset_code <- stringr::str_replace_all(df_td$asset_code,
-                                               stringr::fixed('NTNC'),
-                                               'NTN-C')
-
-
-  # add maturity dates
-  get_matur <- function(x){
-    x <- substr(x, nchar(x)-5, nchar(x))
-    return(as.Date(x,'%d%m%y'))
-  }
-
-  # fix names for NTN-B Principal
-  df_td$asset_code <- stringr::str_replace_all(df_td$asset_code,
-                                               'NTN-B Princ ',
-                                               'NTN-B Principal '  )
+  df_td$asset_code <- fix_td_names(df_td$asset_code)
 
   df_td$matur_date <- as.Date(sapply(df_td$asset_code, get_matur),
                               origin = '1970-01-01' )

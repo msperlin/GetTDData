@@ -2,6 +2,7 @@
 
 export(download.TD.data)
 export(get.yield.curve)
+export(get_cache_folder)
 export(read.TD.files)
 export(td_get)
 import(rvest)
