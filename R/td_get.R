@@ -25,11 +25,6 @@ td_get <- function(asset_codes = 'LTN',
                    last_year = as.numeric(format(Sys.Date(), "%Y")),
                    dl_folder = get_cache_folder()) {
 
-  # check folder
-  if (!dir.exists(dl_folder)) {
-    fs::dir_create(dl_folder)
-  }
-
   # check years
   if (first_year < 2005) {
     warning('First year of TD data is 2005. Fixing input first_year to 2005.')
@@ -45,10 +40,13 @@ td_get <- function(asset_codes = 'LTN',
   possible_names <- get_td_names()
   if (!is.null(asset_codes)){
 
-    idx <- asset_codes %in% possible_names
+    idx <- !(asset_codes %in% possible_names)
 
-    if (!any(idx)){
-      stop(paste(c('Input asset_codes not valid. It should be one or many of the following: ', possible_names), collapse = ', '))
+    if (any(idx)){
+      cli::cli_abort(
+        paste0('Input asset_codes not valid. ',
+        'It should be one or many of the following: {possible_names}'
+        ))
     }
 
   } else {
@@ -64,17 +62,21 @@ td_get <- function(asset_codes = 'LTN',
 
   cli::cli_h3('Downloading TD files')
   purrr::walk2(dl_grid$asset_codes, dl_grid$vec_years,
-               .f = dowload_td_file,
+               .f = download_td_file,
                dl_folder = dl_folder)
 
   cli::cli_h3('Checking files')
-  local_files <- fs::dir_ls(dl_folder)
+  asset_folder <- stringr::str_glue(
+    "{dl_folder}/{asset_codes}"
+  )
+
+  local_files <- fs::dir_ls(asset_folder)
 
   n_files <- length(local_files)
   cli::cli_alert_success("Found {n_files} files")
 
   if (n_files == 0){
-    cli::cli_abort('Cant find any files at {dl_folder}')
+    cli::cli_abort('Cant find any files at {asset_folder}')
   }
 
   cli::cli_h3('Reading files')

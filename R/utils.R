@@ -1,8 +1,11 @@
-#' Returns available instruments
+#' Returns available nammes at TD site
 #'
 #' @return string vector
 #'
-#' @noRd
+#' @export
+#'
+#' @examples
+#' get_td_names()
 get_td_names <- function() {
   possible.names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
 
@@ -19,7 +22,7 @@ get_td_names <- function() {
 #' get_cache_folder()
 get_cache_folder <- function() {
 
-  cache_dir <- fs::path_temp("TD-temp")
+  cache_dir <- fs::path_temp("td-files")
 
   return(cache_dir)
 }

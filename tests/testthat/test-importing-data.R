@@ -24,6 +24,20 @@ test_that(desc = 'td_get() -- single LTN',{
 
 })
 
+test_that(desc = 'td_get() -- two assets',{
+
+  if (!covr::in_covr()) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
+  df_ltn <- td_get(asset_codes = c('LTN', "NTN-B"),
+                   first_year = first_year)
+
+  test_df(df_ltn)
+
+})
+
 test_that(desc = 'td_get() -- by asset ',{
 
   if (!covr::in_covr()) {

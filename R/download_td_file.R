@@ -5,15 +5,23 @@
 #' @param dl_folder download folder
 #'
 #' @noRd
-dowload_td_file <- function(asset_code, year, dl_folder) {
+download_td_file <- function(asset_code, year, dl_folder) {
 
+  # check folder
+  asset_folder <- fs::path(
+    dl_folder,
+    asset_code)
+
+  if (!dir.exists(asset_folder)) {
+    fs::dir_create(asset_folder, recurse = TRUE)
+  }
 
   base_url <- stringr::str_glue(
     "https://cdn.tesouro.gov.br/sistemas-internos/apex/producao/sistemas/sistd/{year}/{asset_code}_{year}.xls"
   )
   file_basename <- basename(base_url)
 
-  local_file <- fs::path(dl_folder, file_basename)
+  local_file <- fs::path(asset_folder, file_basename)
 
   cli::cli_alert_info('Downloading {file_basename}')
 
