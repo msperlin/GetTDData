@@ -16,7 +16,7 @@ You can use input asset_codes to restrict the downloads to specific bonds"><!-- 
     
     <a class="navbar-brand me-2" href="../index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@ You can use input asset_codes to restrict the downloads to specific bonds"><!-- 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Downloads data of Brazilian government bonds directly from the website</h1>
-      <small class="dont-index">Source: <a href="https://github.com/msperlin/GetTDData/blob/HEAD/R/get_td.R" class="external-link"><code>R/get_td.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/msperlin/GetTDData/blob/HEAD/R/td_get.R" class="external-link"><code>R/td_get.R</code></a></small>
       <div class="d-none name"><code>td_get.Rd</code></div>
     </div>
 
@@ -70,8 +70,8 @@ You can use input asset_codes to restrict the downloads to specific bonds</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">td_get</span><span class="op">(</span></span>
 <span>  asset_codes <span class="op">=</span> <span class="st">"LTN"</span>,</span>
 <span>  first_year <span class="op">=</span> <span class="fl">2005</span>,</span>
-<span>  last_year <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">year</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  dl_folder <span class="op">=</span> <span class="fu">get_cache_folder</span><span class="op">(</span><span class="op">)</span></span>
+<span>  last_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  dl_folder <span class="op">=</span> <span class="fu"><a href="get_cache_folder.html">get_cache_folder</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -83,23 +83,17 @@ names of the excel files. E.g. asset_codes = 'LTN'. When set to NULL, it
 will download all available assets</p></dd>
 
 
+<dt>first_year</dt>
+<dd><p>first year of data (minimum of 2015)</p></dd>
+
+
+<dt>last_year</dt>
+<dd><p>first year of data</p></dd>
+
+
 <dt>dl_folder</dt>
 <dd><p>Name of folder to save excel files from tesouro direto (will
 create if it does not exists)</p></dd>
-
-
-<dt>do_clean_up</dt>
-<dd><p>Clean up folder before downloading? (TRUE or FALSE)</p></dd>
-
-
-<dt>do_overwrite</dt>
-<dd><p>Overwrite excel files? (TRUE or FALSE). If FALSE, will
-only download the new data for the current year</p></dd>
-
-
-<dt>n_dl</dt>
-<dd><p>Sets how many files to download from the website. Used only to
-decrease CRAN CHECK time. The default value is NULL (downloads all files)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -111,13 +105,9 @@ decrease CRAN CHECK time. The default value is NULL (downloads all files)</p></d
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># only download file where string LTN is found</span></span></span>
-<span class="r-in"><span><span class="co"># (only 1 file for simplicity)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="download.TD.data.html">download.TD.data</a></span><span class="op">(</span>asset_codes <span class="op">=</span> <span class="st">'LTN'</span>, n_dl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">td_get</span><span class="op">(</span><span class="st">"LTN"</span>, <span class="fl">2020</span>, <span class="fl">2022</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="co"># The excel file should be available in folder 'TD Files' (default name)</span></span></span>
-<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

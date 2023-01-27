@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
                         <h4 data-toc-skip class="author">Marcelo
 Perlin</h4>
             
-            <h4 data-toc-skip class="date">2023-01-24</h4>
+            <h4 data-toc-skip class="date">2023-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/msperlin/GetTDData/blob/HEAD/vignettes/gtdd-vignette_GetTDData.Rmd" class="external-link"><code>vignettes/gtdd-vignette_GetTDData.Rmd</code></a></small>
       <div class="d-none name"><code>gtdd-vignette_GetTDData.Rmd</code></div>
@@ -106,181 +106,46 @@ code in R:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/msperlin/GetTDData/" class="external-link">GetTDData</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">asset.codes</span> <span class="op">&lt;-</span> <span class="st">'LTN'</span>   <span class="co"># Identifier of assets </span></span>
-<span><span class="va">cache_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'/TD_cache'</span><span class="op">)</span></span>
+<span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="st">'LTN'</span>   <span class="co"># Identifier of assets </span></span>
+<span><span class="va">first_year</span> <span class="op">&lt;-</span> <span class="fl">2020</span></span>
+<span><span class="va">last_year</span> <span class="op">&lt;-</span> <span class="fl">2022</span></span>
 <span></span>
-<span><span class="va">my.flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download.TD.data.html">download.TD.data</a></span><span class="op">(</span>asset.codes <span class="op">=</span> <span class="va">asset.codes</span>, </span>
-<span>                            dl.folder <span class="op">=</span> <span class="va">cache_folder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: `download.TD.Data()` was deprecated in GetTDData v1.5.3 (2023-01-24).</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> This function is deprecated and will be removed soon. Please use the new</span></span>
-<span><span class="co">##   function, td_get().</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in download.TD.data(asset.codes = asset.codes, dl.folder =</span></span>
-<span><span class="co">## cache_folder): Folder /tmp/RtmpIPnVvb/TD_cache was not found. Creating a it..</span></span></code></pre>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2005.xls (1-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2006.xls (2-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2007.xls (3-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2008.xls (4-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2009.xls (5-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2010.xls (6-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2011.xls (7-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2012.xls (8-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2013.xls (9-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2014.xls (10-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2015.xls (11-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2016.xls (12-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2017.xls (13-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2018.xls (14-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2019.xls (15-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2020.xls (16-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2021.xls (17-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2022.xls (18-19) Downloading...</span></span>
-<span><span class="co">## Downloading file /tmp/RtmpIPnVvb/TD_cache/LTN_2023.xls (19-19) Downloading...</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.TD.files.html">read.TD.files</a></span><span class="op">(</span>dl.folder <span class="op">=</span> <span class="va">cache_folder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: `read.TD.files()` was deprecated in GetTDData v1.5.3 (2023-01-24).</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> This function is deprecated and will be removed soon. Please use the new</span></span>
-<span><span class="co">##   function, td_get().</span></span></code></pre>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Reading xls data and saving to data.frame</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2005.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 040105</span></span>
-<span><span class="co">##     Reading Sheet LTN 010405</span></span>
-<span><span class="co">##     Reading Sheet LTN 010705</span></span>
-<span><span class="co">##     Reading Sheet LTN 011005</span></span>
-<span><span class="co">##     Reading Sheet LTN 010106</span></span>
-<span><span class="co">##     Reading Sheet LTN 010406</span></span>
-<span><span class="co">##     Reading Sheet LTN 010706</span></span>
-<span><span class="co">##     Reading Sheet LTN 011006</span></span>
-<span><span class="co">##     Reading Sheet LTN 010107</span></span>
-<span><span class="co">##     Reading Sheet LTN 010407</span></span>
-<span><span class="co">##     Reading Sheet LTN 010707</span></span>
-<span><span class="co">##     Reading Sheet LTN 010108</span></span>
-<span><span class="co">##     Reading Sheet LTN 010708</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2006.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010406</span></span>
-<span><span class="co">##     Reading Sheet LTN 010706</span></span>
-<span><span class="co">##     Reading Sheet LTN 011006</span></span>
-<span><span class="co">##     Reading Sheet LTN 010107</span></span>
-<span><span class="co">##     Reading Sheet LTN 010407</span></span>
-<span><span class="co">##     Reading Sheet LTN 010707</span></span>
-<span><span class="co">##     Reading Sheet LTN 011007</span></span>
-<span><span class="co">##     Reading Sheet LTN 010108</span></span>
-<span><span class="co">##     Reading Sheet LTN 010408</span></span>
-<span><span class="co">##     Reading Sheet LTN 010708</span></span>
-<span><span class="co">##     Reading Sheet LTN 010109</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2007.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010407</span></span>
-<span><span class="co">##     Reading Sheet LTN 010707</span></span>
-<span><span class="co">##     Reading Sheet LTN 011007</span></span>
-<span><span class="co">##     Reading Sheet LTN 010108</span></span>
-<span><span class="co">##     Reading Sheet LTN 010408</span></span>
-<span><span class="co">##     Reading Sheet LTN 010708</span></span>
-<span><span class="co">##     Reading Sheet LTN 011008</span></span>
-<span><span class="co">##     Reading Sheet LTN 010109</span></span>
-<span><span class="co">##     Reading Sheet LTN 010709</span></span>
-<span><span class="co">##     Reading Sheet LTN 011009</span></span>
-<span><span class="co">##     Reading Sheet LTN 010110</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2008.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010408</span></span>
-<span><span class="co">##     Reading Sheet LTN 010708</span></span>
-<span><span class="co">##     Reading Sheet LTN 011008</span></span>
-<span><span class="co">##     Reading Sheet LTN 010109</span></span>
-<span><span class="co">##     Reading Sheet LTN 010409</span></span>
-<span><span class="co">##     Reading Sheet LTN 010709</span></span>
-<span><span class="co">##     Reading Sheet LTN 011009</span></span>
-<span><span class="co">##     Reading Sheet LTN 010110</span></span>
-<span><span class="co">##     Reading Sheet LTN 010710</span></span>
-<span><span class="co">##     Reading Sheet LTN 010111</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2009.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010409</span></span>
-<span><span class="co">##     Reading Sheet LTN 010709</span></span>
-<span><span class="co">##     Reading Sheet LTN 011009</span></span>
-<span><span class="co">##     Reading Sheet LTN 010110</span></span>
-<span><span class="co">##     Reading Sheet LTN 010710</span></span>
-<span><span class="co">##     Reading Sheet LTN 010111</span></span>
-<span><span class="co">##     Reading Sheet LTN 010112</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2010.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010710</span></span>
-<span><span class="co">##     Reading Sheet LTN 010111</span></span>
-<span><span class="co">##     Reading Sheet LTN 010711</span></span>
-<span><span class="co">##     Reading Sheet LTN 010112</span></span>
-<span><span class="co">##     Reading Sheet LTN 010113</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2011.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010711</span></span>
-<span><span class="co">##     Reading Sheet LTN 010112</span></span>
-<span><span class="co">##     Reading Sheet LTN 010113</span></span>
-<span><span class="co">##     Reading Sheet LTN 010114</span></span>
-<span><span class="co">##     Reading Sheet LTN 010115</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2012.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010113</span></span>
-<span><span class="co">##     Reading Sheet LTN 010114</span></span>
-<span><span class="co">##     Reading Sheet LTN 010115</span></span>
-<span><span class="co">##     Reading Sheet LTN 010116</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2013.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010114</span></span>
-<span><span class="co">##     Reading Sheet LTN 010115</span></span>
-<span><span class="co">##     Reading Sheet LTN 010116</span></span>
-<span><span class="co">##     Reading Sheet LTN 010117</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2014.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010115</span></span>
-<span><span class="co">##     Reading Sheet LTN 010116</span></span>
-<span><span class="co">##     Reading Sheet LTN 010117</span></span>
-<span><span class="co">##     Reading Sheet LTN 010118</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2015.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010116</span></span>
-<span><span class="co">##     Reading Sheet LTN 010117</span></span>
-<span><span class="co">##     Reading Sheet LTN 010118</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2016.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010117</span></span>
-<span><span class="co">##     Reading Sheet LTN 010118</span></span>
-<span><span class="co">##     Reading Sheet LTN 010119</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2017.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010118</span></span>
-<span><span class="co">##     Reading Sheet LTN 010119</span></span>
-<span><span class="co">##     Reading Sheet LTN 010120</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2018.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010119</span></span>
-<span><span class="co">##     Reading Sheet LTN 010120</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2019.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010120</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##     Reading Sheet LTN 010122</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2020.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010121</span></span>
-<span><span class="co">##     Reading Sheet LTN 010122</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##     Reading Sheet LTN 010126</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2021.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010122</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##     Reading Sheet LTN 010724</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##     Reading Sheet LTN 010126</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2022.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010123</span></span>
-<span><span class="co">##     Reading Sheet LTN 010724</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##     Reading Sheet LTN 010126</span></span>
-<span><span class="co">##     Reading Sheet LTN 010129</span></span>
-<span><span class="co">##  Reading File = /tmp/RtmpIPnVvb/TD_cache/LTN_2023.xls</span></span>
-<span><span class="co">##     Reading Sheet LTN 010724</span></span>
-<span><span class="co">##     Reading Sheet LTN 010125</span></span>
-<span><span class="co">##     Reading Sheet LTN 010126</span></span>
-<span><span class="co">##     Reading Sheet LTN 010129</span></span></code></pre>
+<span><span class="va">df_td</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/td_get.html">td_get</a></span><span class="op">(</span><span class="va">assets</span>,</span>
+<span>                <span class="va">first_year</span>,</span>
+<span>                <span class="va">last_year</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span></code></pre>
+<pre><code><span><span class="co">## ── Downloading TD files</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Downloading LTN_2020.xls</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2020.xls</span> is found, with size 176.1 kB.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Downloading LTN_2021.xls</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2021.xls</span> is found, with size 175.1 kB.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Downloading LTN_2022.xls</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2022.xls</span> is found, with size 175.6 kB.</span></span></code></pre>
+<pre><code><span><span class="co">## </span></span></code></pre>
+<pre><code><span><span class="co">## ── Checking files</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Found 3 files</span></span></code></pre>
+<pre><code><span><span class="co">## </span></span></code></pre>
+<pre><code><span><span class="co">## ── Reading files</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Reading <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2020.xls</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010121</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010122</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010123</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010125</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010126</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Reading <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2021.xls</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010122</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010123</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010724</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010125</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010126</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Reading <span style="color: #0000BB;">/tmp/Rtmp3sAu0N/TD-temp/LTN_2022.xls</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010123</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010724</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010125</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010126</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span>  Reading Sheet LTN 010129</span></span></code></pre>
 <p>Let’s plot the prices to check if the code worked:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -291,37 +156,32 @@ code in R:</p>
 <pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># filter  LTN </span></span>
 <span><span class="va">my_asset_code</span> <span class="op">&lt;-</span> <span class="st">"LTN 010123"</span></span>
-<span><span class="va">first_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2015-01-01"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">my.df</span> <span class="op">&lt;-</span> <span class="va">my.df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ref.date</span> <span class="op">&gt;=</span> <span class="va">first_date</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">LTN</span> <span class="op">&lt;-</span> <span class="va">my.df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">asset.code</span>  <span class="op">==</span>  <span class="va">my_asset_code</span>,</span>
-<span>         <span class="va">ref.date</span> <span class="op">&gt;=</span> <span class="va">first_date</span><span class="op">)</span></span>
+<span><span class="va">LTN</span> <span class="op">&lt;-</span> <span class="va">df_td</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">asset_code</span>  <span class="op">==</span>  <span class="va">my_asset_code</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">LTN</span>, </span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref.date</span><span class="op">)</span>, </span>
-<span>                y <span class="op">=</span> <span class="va">price.bid</span>, </span>
-<span>                color <span class="op">=</span> <span class="va">asset.code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref_date</span><span class="op">)</span>, </span>
+<span>                y <span class="op">=</span> <span class="va">price_bid</span>, </span>
+<span>                color <span class="op">=</span> <span class="va">asset_code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">''</span>, x <span class="op">=</span> <span class="st">'Dates'</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
 <p><img src="gtdd-vignette_GetTDData_files/figure-html/plot.prices-1.png" width="672"></p>
 <p>As expected, the prices from this bond will converge to its face
 value, 1000 R$, at the maturity date. We can also look at its
 time-varying annual yield:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">LTN</span>, </span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref.date</span><span class="op">)</span>, </span>
-<span>                y <span class="op">=</span> <span class="va">yield.bid</span>, </span>
-<span>                color <span class="op">=</span> <span class="va">asset.code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref_date</span><span class="op">)</span>, </span>
+<span>                y <span class="op">=</span> <span class="va">yield_bid</span>, </span>
+<span>                color <span class="op">=</span> <span class="va">asset_code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">''</span>, </span>
 <span>       x <span class="op">=</span> <span class="st">'Dates'</span><span class="op">)</span></span>
@@ -333,20 +193,22 @@ the website. Suppose we wanted to look at the prices of all available
 maturities for bonds of type LTN. Since the data is already downloaded,
 all we need to do is to plot the prices and yields of the different debt
 contracts:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot data (prices)</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">my.df</span>, </span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref.date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">price.bid</span>, color <span class="op">=</span> <span class="va">asset.code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_td</span>, </span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref_date</span><span class="op">)</span>, </span>
+<span>                y <span class="op">=</span> <span class="va">price_bid</span>, </span>
+<span>                color <span class="op">=</span> <span class="va">asset_code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">''</span>, x <span class="op">=</span> <span class="st">'Dates'</span>, y <span class="op">=</span> <span class="st">'Prices'</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
 <p><img src="gtdd-vignette_GetTDData_files/figure-html/example2_plots-1.png" width="672"></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot data (yields)</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">my.df</span>, </span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref.date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yield.bid</span>, color <span class="op">=</span> <span class="va">asset.code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_td</span>, </span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref_date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">yield_bid</span>, color <span class="op">=</span> <span class="va">asset_code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">''</span>, x <span class="op">=</span> <span class="st">'Dates'</span>, y <span class="op">=</span> <span class="st">'Yields'</span> <span class="op">)</span></span>
