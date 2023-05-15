@@ -1,5 +1,5 @@
 ## Version 1.5.4 (2023-05-15)
-  - fixed issue with CRAN check. The vignette could fail in CHECK. The vignettes are now part of Readme.Rmd, which compiles locally.
+  - fixed issue with CRAN check. The vignette could fail in CHECK. The vignettes were deleted and the content is  now part of Readme.Rmd file, which compiles locally.
   
 ## Version 1.5.3 (2023-01-24)
   - deprecated functions download.TD.data() and read.TD.files(). Both are replaced by td_get()
