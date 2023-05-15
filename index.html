@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,13 +37,6 @@
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/gtdd-vignette_GetTDData.html">How to use GetTDData</a>
-    <a class="dropdown-item" href="articles/gtdd-vignette_YieldCurve.html">Downloading the Current Yield Curve</a>
-  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
@@ -68,28 +61,121 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9">
-<p><!-- badges: end --></p>
+<!-- badges: end -->
 <div class="section level1">
 <div class="page-header"><h1 id="package-gettddata">Package <code>GetTDData</code>
 <a class="anchor" aria-label="anchor" href="#package-gettddata"></a>
 </h1></div>
 <p>Information regarding prices and yields of bonds issued by the Brazilian government can be downloaded manually as excel files from the <a href="https://www.tesourodireto.com.br/" class="external-link">Tesouro Direto website</a>. However, it is painful to aggregate all of this data into something useful as the several files don’t have an uniform format.</p>
 <p>Package <code>GetTDData</code> makes the process of importing data from Tesouro direto much easier. All that you need in order to download the data is the name of the assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from CRAN (stable version)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">'GetTDData'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># from github (development version)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'msperlin/GetTDData'</span>)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h1>
-<pre><code><span><span class="co"># from CRAN (stable version)</span></span>
-<span><span class="fu">install.package</span><span class="op">(</span><span class="st">'GetTDData'</span><span class="op">)</span></span>
+<div class="section level2">
+<h2 id="how-to-use-gettddata">How to use GetTDData<a class="anchor" aria-label="anchor" href="#how-to-use-gettddata"></a>
+</h2>
+<p>Suppose you need financial data (prices and yields) for a bond of type LTN with a maturity (end of contract) at 2023-01-01. This bullet bond is the most basic debt contract the Brazilian government issues. It does not pay any value (coupon) during its lifetime and will pay 1000 R$ at maturity.</p>
+<p>In order to get the data, all you need to do is to run the following code in R:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/msperlin/GetTDData/" class="external-link">GetTDData</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># from github (development version)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'msperlin/GetTDData'</span><span class="op">)</span></span></code></pre>
+<span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="st">'LTN'</span>   <span class="co"># Identifier of assets </span></span>
+<span><span class="va">first_year</span> <span class="op">&lt;-</span> <span class="fl">2020</span></span>
+<span><span class="va">last_year</span> <span class="op">&lt;-</span> <span class="fl">2022</span></span>
+<span></span>
+<span><span class="va">df_td</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/td_get.html">td_get</a></span><span class="op">(</span><span class="va">assets</span>,</span>
+<span>                <span class="va">first_year</span>,</span>
+<span>                <span class="va">last_year</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Downloading TD files</span></span>
+<span><span class="co">#&gt; ℹ Downloading LTN_2020.xls</span></span>
+<span><span class="co">#&gt; ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2020.xls' is found, with size 176.1 kB.</span></span>
+<span><span class="co">#&gt; ℹ Downloading LTN_2021.xls</span></span>
+<span><span class="co">#&gt; ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2021.xls' is found, with size 175.1 kB.</span></span>
+<span><span class="co">#&gt; ℹ Downloading LTN_2022.xls</span></span>
+<span><span class="co">#&gt; ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2022.xls' is found, with size 175.6 kB.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Checking files</span></span>
+<span><span class="co">#&gt; ✔ Found 3 files</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── Reading files</span></span>
+<span><span class="co">#&gt; ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2020.xls'</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010121</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010122</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010123</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010125</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010126</span></span>
+<span><span class="co">#&gt; ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2021.xls'</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010122</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010123</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010724</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010125</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010126</span></span>
+<span><span class="co">#&gt; ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2022.xls'</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010123</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010724</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010125</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010126</span></span>
+<span><span class="co">#&gt; ✔    Reading Sheet LTN 010129</span></span></code></pre></div>
+<p>Let’s plot the prices to check if the code worked:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span></span>
+<span><span class="co"># filter  LTN </span></span>
+<span><span class="va">my_asset_code</span> <span class="op">&lt;-</span> <span class="st">"LTN 010123"</span></span>
+<span></span>
+<span><span class="va">LTN</span> <span class="op">&lt;-</span> <span class="va">df_td</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">asset_code</span>  <span class="op">==</span>  <span class="va">my_asset_code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">LTN</span>, </span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">ref_date</span><span class="op">)</span>, </span>
+<span>                y <span class="op">=</span> <span class="va">price_bid</span>, </span>
+<span>                color <span class="op">=</span> <span class="va">asset_code</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">''</span>, x <span class="op">=</span> <span class="st">'Dates'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot.prices-1.png" width="100%"></p>
 </div>
-<div class="section level1">
-<h1 id="how-to-use-gettddata">How to use <code>GetTDData</code>
-<a class="anchor" aria-label="anchor" href="#how-to-use-gettddata"></a>
-</h1>
-<p>See documentation page at <a href="https://msperlin.github.io/GetTDData/">https://msperlin.github.io/GetTDData/</a>.</p>
+<div class="section level2">
+<h2 id="downloading-the-brazilian-yield-curve">Downloading the Brazilian Yield Curve<a class="anchor" aria-label="anchor" href="#downloading-the-brazilian-yield-curve"></a>
+</h2>
+<p>The latest version of <code>GetTDData</code> offers function <code>get.yield.curve</code> to download the current Brazilian yield curve directly from Anbima. The yield curve is a tool of financial analysts that show, based on current prices of fixed income instruments, how the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][<a href="https://www.investopedia.com/terms/y/yieldcurve.asp" class="external-link uri">https://www.investopedia.com/terms/y/yieldcurve.asp</a>].</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/msperlin/GetTDData/" class="external-link">GetTDData</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df.yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get.yield.curve.html">get.yield.curve</a></span><span class="op">(</span><span class="op">)</span>  </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">df.yield</span><span class="op">)</span></span></code></pre></div>
+<p>And we can plot it for the derised result:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df.yield</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ref.date</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="op">~</span><span class="va">type</span>, scales <span class="op">=</span> <span class="st">'free'</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'The current Brazilian Yield Curve '</span><span class="op">)</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'Date: '</span>, <span class="va">df.yield</span><span class="op">$</span><span class="va">current.date</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>     </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
