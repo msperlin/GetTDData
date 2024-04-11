@@ -10,7 +10,7 @@ td_get_current()
 a dataframe with prices
 }
 \description{
-Fetches current prices of TD assets from website's json api
+Fetches current prices of TD assets from website's json api at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>
 }
 \examples{
 td_get_current()
