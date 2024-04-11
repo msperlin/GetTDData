@@ -1,3 +1,6 @@
+## Version 1.5.5 (2024-04-11)
+  - added td_get_current(), for fetching current TD prices from the website.
+
 ## Version 1.5.4 (2023-05-15)
   - fixed issue with CRAN check. The vignette could fail in CHECK. The vignettes were deleted and the content is  now part of Readme.Rmd file, which compiles locally.
   - set dependency for R > 4.1.0

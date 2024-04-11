@@ -59,3 +59,15 @@ test_that(desc = 'td_get() -- by asset ',{
 })
 
 
+test_that(desc = 'td_get_curret()',{
+
+  if (!covr::in_covr()) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
+  df_current <- td_get_current()
+  test_df(df_current)
+})
+
+
