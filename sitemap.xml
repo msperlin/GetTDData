@@ -19,9 +19,6 @@
     <loc>https://msperlin.github.io/GetTDData/news/index.html</loc>
   </url>
   <url>
-    <loc>https://msperlin.github.io/GetTDData/reference/download.TD.data.html</loc>
-  </url>
-  <url>
     <loc>https://msperlin.github.io/GetTDData/reference/get.yield.curve.html</loc>
   </url>
   <url>
@@ -32,9 +29,6 @@
   </url>
   <url>
     <loc>https://msperlin.github.io/GetTDData/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://msperlin.github.io/GetTDData/reference/read.TD.files.html</loc>
   </url>
   <url>
     <loc>https://msperlin.github.io/GetTDData/reference/td_get.html</loc>
