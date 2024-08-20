@@ -11,3 +11,4 @@ codemeta.json
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+cran-comments.md
