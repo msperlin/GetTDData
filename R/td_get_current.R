@@ -6,10 +6,16 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' td_get_current()
+#' }
 td_get_current <- function() {
 
   cli::cli_alert_info("fetching current TD prices")
+
+  # 20240820: error on call: HTTP status was '403 Forbidden
+  cli::cli_alert_danger("20240820: The json endpoint for current TD prices is now forbidden. Returning empty dataframe. ")
+  return(dplyr::tibble())
 
   url <- "https://www.tesourodireto.com.br/json/br/com/b3/tesourodireto/service/api/treasurybondsinfo.json"
   l_out <- jsonlite::fromJSON(url)

@@ -1,3 +1,6 @@
+## Version 1.5.6 (2024-08-20)
+  - fixed bug at td_get_current(), the api endpoint is no longer available. 
+  
 ## Version 1.5.5 (2024-04-11)
   - added td_get_current(), for fetching current TD prices from the website.
 

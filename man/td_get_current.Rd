@@ -13,5 +13,7 @@ a dataframe with prices
 Fetches current prices of TD assets from website's json api at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>
 }
 \examples{
+\dontrun{
 td_get_current()
+}
 }
