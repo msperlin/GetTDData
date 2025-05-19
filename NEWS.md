@@ -1,3 +1,6 @@
+## Version 1.5.7 (2025-05-19)
+  - removed use of pkg humanize (will be removed from cran)
+
 ## Version 1.5.6 (2024-08-20)
   - fixed bug at td_get_current(), the api endpoint is no longer available. 
   

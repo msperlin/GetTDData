@@ -55,8 +55,11 @@ download_td_file <- function(asset_code, year, dl_folder) {
     return(FALSE)
 
   } else {
-    this_size <- humanize::natural_size(fs::file_size(local_file))
-    cli::cli_alert_success("\t{local_file} is found, with size {this_size}.")
+    # 20250519 removed due to humanize exit from cran
+    #this_size <- humanize::natural_size(fs::file_size(local_file))
+    #cli::cli_alert_success("\t{local_file} is found, with size {this_size}.")
+
+    cli::cli_alert_success("\t{local_file} is found.")
   }
 
   return(TRUE)
