@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-08-20T17:39Z
+last_built: 2025-05-19T12:08Z
 urls:
   reference: https://msperlin.github.io/GetTDData/reference
   article: https://msperlin.github.io/GetTDData/articles
