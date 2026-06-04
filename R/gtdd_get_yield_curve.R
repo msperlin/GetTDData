@@ -30,15 +30,15 @@ get_yield_curve <- function(){
   # get yield curve data and organize it
   df_yc <- df_yc[2:nrow(df_yc), ]
 
-  names(df_yc) <- c('n.biz.days', 'real_return', 'nominal_return', 'implicit_inflation')
+  names(df_yc) <- c('n_biz_days', 'real_return', 'nominal_return', 'implicit_inflation')
 
   df_yc <- as.data.frame(lapply(df_yc, FUN = function(x) as.character(x)),
                       stringsAsFactors = F)
 
-  n.biz.days <- NULL
+  n_biz_days <- NULL
   df_yc <- tidyr::pivot_longer(
     data = df_yc,
-    cols = -n.biz.days,
+    cols = -n_biz_days,
     names_to = "type",
     values_to = "value"
   )
@@ -46,7 +46,7 @@ get_yield_curve <- function(){
   df_yc <- df_yc[df_yc$value!='',]
 
   # fix cols
-  my.fix.fct <- function(x) {
+  my_fix_fct <- function(x) {
     x <- as.character(x)
     x <- stringr::str_replace(x, stringr::fixed('.'), '')
     x <- stringr::str_replace(x, stringr::fixed(','), '.')
@@ -54,9 +54,9 @@ get_yield_curve <- function(){
     return(x)
   }
 
-  df_yc <- as.data.frame(lapply(df_yc, FUN = my.fix.fct), stringsAsFactors = F)
+  df_yc <- as.data.frame(lapply(df_yc, FUN = my_fix_fct), stringsAsFactors = F)
 
-  df_yc$n.biz.days <- as.numeric(df_yc$n.biz.days)
+  df_yc$n_biz_days <- as.numeric(df_yc$n_biz_days)
   df_yc$value <- as.numeric(df_yc$value)
 
   bizdays::load_builtin_calendars()
@@ -66,9 +66,9 @@ get_yield_curve <- function(){
                          holidays = my_holidays,
                          weekdays=c("saturday", "sunday"))
 
-  df_yc$ref.date <- bizdays::add.bizdays(date_now, df_yc$n.biz.days,
+  df_yc$ref_date <- bizdays::add.bizdays(date_now, df_yc$n_biz_days,
                                          cal = cal)
-  df_yc$current.date <- date_now
+  df_yc$current_date <- date_now
 
   return(df_yc)
 

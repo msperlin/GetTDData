@@ -113,10 +113,10 @@ And we can plot it for the desired result:
 ``` r
 library(ggplot2)
 
-p <- ggplot(df_yield, aes(x=ref.date, y = value) ) +
+p <- ggplot(df_yield, aes(x=ref_date, y = value) ) +
   geom_line(size=1) + geom_point() + facet_grid(~type, scales = 'free') + 
   labs(title = paste0('The current Brazilian Yield Curve '),
-       subtitle = paste0('Date: ', df_yield$current.date[1]))     
+       subtitle = paste0('Date: ', df_yield$current_date[1]))     
 
 print(p)
 ```

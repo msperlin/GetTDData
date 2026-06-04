@@ -6,9 +6,9 @@
 #' @examples
 #' get_td_names()
 get_td_names <- function() {
-  possible.names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
+  possible_names <- c("LFT","LTN","NTN-C","NTN-B","NTN-B Principal","NTN-F")
 
-  return(possible.names)
+  return(possible_names)
 }
 
 #' Returns the cache directory path
