@@ -10,7 +10,7 @@ Imports: stringr, readxl, utils,
          tidyr, rvest, xml2, 
          dplyr, fs,
          cli,
-         tibble, jsonlite
+         jsonlite
 License: MIT + file LICENSE
 BugReports: https://github.com/msperlin/GetTDData/issues/
 URL: https://github.com/msperlin/GetTDData/,

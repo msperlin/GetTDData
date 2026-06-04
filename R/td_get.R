@@ -83,7 +83,7 @@ td_get <- function(asset_codes = 'LTN',
   # Set up parallel execution if multiple cores are available
   n_cores <- parallel::detectCores() - 1
   if (is.na(n_cores) || n_cores < 1) n_cores <- 1
-  n_cores <- min(n_cores, 4) # Limit to 4 to avoid overhead
+  n_cores <- min(n_cores, 2) # Limit to 2 to comply with CRAN checks
 
   if (n_cores > 1) {
     cl <- parallel::makeCluster(n_cores)
