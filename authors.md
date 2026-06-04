@@ -10,13 +10,13 @@ Source:
 [`DESCRIPTION`](https://github.com/msperlin/GetTDData/blob/master/DESCRIPTION)
 
 Perlin M (2026). *GetTDData: Get Data for Brazilian Bonds (Tesouro
-Direto)*. R package version 1.5.7,
+Direto)*. R package version 1.6.0,
 <https://github.com/msperlin/GetTDData/>.
 
     @Manual{,
       title = {GetTDData: Get Data for Brazilian Bonds (Tesouro Direto)},
       author = {Marcelo Perlin},
       year = {2026},
-      note = {R package version 1.5.7},
+      note = {R package version 1.6.0},
       url = {https://github.com/msperlin/GetTDData/},
     }

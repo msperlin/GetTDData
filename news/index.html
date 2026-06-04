@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,18 @@
       <small>Source: <a href="https://github.com/msperlin/GetTDData/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.6.0" id="version-160-2026-06-04">Version 1.6.0 (2026-06-04)<a class="anchor" aria-label="anchor" href="#version-160-2026-06-04"></a></h2>
+<ul><li>implemented parallel file downloading using <code><a href="https://jeroen.r-universe.dev/curl/reference/multi_download.html" class="external-link">curl::multi_download</a></code> to speed up asset fetching</li>
+<li>implemented safe parallel sheet parsing using socket clusters (<code>makeCluster</code> and <code>parLapply</code>), improving read speed and preventing C++ fork deadlocks</li>
+<li>optimized sheet-reading loop by accumulating data frames in a list and calling <code>bind_rows</code> once</li>
+<li>vectorized date parsing in <code>td_get</code> to avoid row-by-row <code>sapply</code> calls</li>
+<li>renamed <code><a href="../reference/get_yield_curve.html">get.yield.curve()</a></code> to <code><a href="../reference/get_yield_curve.html">get_yield_curve()</a></code> and provided a deprecated dot-case wrapper for backward compatibility</li>
+<li>removed unused package dependency <code>purrr</code> from DESCRIPTION Imports</li>
+<li>removed unused package dependency <code>lubridate</code> from DESCRIPTION Suggests and replaced with base R equivalents in tests</li>
+<li>converted all internal dot-case variables and column names (e.g. <code>n.biz.days</code>, <code>ref.date</code>, <code>current.date</code>, <code>possible.names</code>) to snake_case</li>
+<li>fixed and corrected roxygen2 documentation inconsistency details for parameters and return values</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.7" id="version-157-2025-05-19">Version 1.5.7 (2025-05-19)<a class="anchor" aria-label="anchor" href="#version-157-2025-05-19"></a></h2><p class="text-muted">CRAN release: 2025-05-19</p>
 <ul><li>removed use of pkg humanize (will be removed from cran)</li>
