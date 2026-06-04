@@ -1,3 +1,14 @@
+## Version 1.6.0 (2026-06-04)
+  - implemented parallel file downloading using `curl::multi_download` to speed up asset fetching
+  - implemented safe parallel sheet parsing using socket clusters (`makeCluster` and `parLapply`), improving read speed and preventing C++ fork deadlocks
+  - optimized sheet-reading loop by accumulating data frames in a list and calling `bind_rows` once
+  - vectorized date parsing in `td_get` to avoid row-by-row `sapply` calls
+  - renamed `get.yield.curve()` to `get_yield_curve()` and provided a deprecated dot-case wrapper for backward compatibility
+  - removed unused package dependency `purrr` from DESCRIPTION Imports
+  - removed unused package dependency `lubridate` from DESCRIPTION Suggests and replaced with base R equivalents in tests
+  - converted all internal dot-case variables and column names (e.g. `n.biz.days`, `ref.date`, `current.date`, `possible.names`) to snake_case
+  - fixed and corrected roxygen2 documentation inconsistency details for parameters and return values
+
 ## Version 1.5.7 (2025-05-19)
   - removed use of pkg humanize (will be removed from cran)
 
