@@ -7,10 +7,10 @@
 get.yield.curve()
 }
 \value{
-A dataframe with information about the yield curve
+A data frame with information about the yield curve.
 }
 \description{
-Downloads and parses information about the current Brazilian yield curve.
+Downloads and parses information about the current Brazilian yield curve from Anbima.
 }
 \examples{
 \dontrun{

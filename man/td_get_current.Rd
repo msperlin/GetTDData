@@ -7,13 +7,13 @@
 td_get_current()
 }
 \value{
-a dataframe with prices
+A data frame with prices.
 }
 \description{
-Fetches current prices of TD assets from website's json api at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>
+Fetches current prices of Tesouro Direto (TD) assets from the website's JSON API at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>.
 }
 \examples{
 \dontrun{
-td_get_current()
+df_current <- td_get_current()
 }
 }

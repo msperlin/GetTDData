@@ -1,13 +1,13 @@
 #' Returns current TD prices
 #'
-#' Fetches current prices of TD assets from website's json api at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>
+#' Fetches current prices of Tesouro Direto (TD) assets from the website's JSON API at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>.
 #'
-#' @return a dataframe with prices
+#' @return A data frame with prices.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' td_get_current()
+#' df_current <- td_get_current()
 #' }
 td_get_current <- function() {
 

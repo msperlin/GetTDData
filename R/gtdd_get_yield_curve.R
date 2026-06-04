@@ -1,8 +1,8 @@
 #' Gets the current yield curve
 #'
-#' Downloads and parses information about the current Brazilian yield curve.
+#' Downloads and parses information about the current Brazilian yield curve from Anbima.
 #'
-#' @return A dataframe with information about the yield curve
+#' @return A data frame with information about the yield curve.
 #' @export
 #' @import rvest xml2
 #'

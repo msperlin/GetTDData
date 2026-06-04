@@ -2,15 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{get_cache_folder}
 \alias{get_cache_folder}
-\title{Returns cache directory}
+\title{Returns the cache directory path}
 \usage{
 get_cache_folder()
 }
 \value{
-a path
+A character string representing the folder path.
 }
 \description{
-Returns cache directory
+Returns the cache directory path
 }
 \examples{
 get_cache_folder()

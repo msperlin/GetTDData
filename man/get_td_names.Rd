@@ -2,15 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{get_td_names}
 \alias{get_td_names}
-\title{Returns available nammes at TD site}
+\title{Returns the available asset names at the Tesouro Direto (TD) website}
 \usage{
 get_td_names()
 }
 \value{
-string vector
+A character vector of names.
 }
 \description{
-Returns available nammes at TD site
+Returns the available asset names at the Tesouro Direto (TD) website
 }
 \examples{
 get_td_names()

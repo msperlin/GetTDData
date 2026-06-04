@@ -1,3 +1,10 @@
+#' Reads and cleans data from a Tesouro Direto Excel file
+#'
+#' @param local_file The path to the local Excel file to read.
+#'
+#' @return A data frame containing the cleaned data.
+#'
+#' @noRd
 read_td_file <- function(local_file) {
 
   cli::cli_alert_info('Reading {local_file}')
@@ -9,7 +16,7 @@ read_td_file <- function(local_file) {
   sheets <- readxl::excel_sheets(local_file)
   #})
 
-  this_df <- tibble::tibble()
+  df_list <- list()
   for (i_sheet in sheets) {
 
     cli::cli_alert_success('\tReading Sheet {i_sheet}')
@@ -32,9 +39,10 @@ read_td_file <- function(local_file) {
     # filter columns to import
 
 
-    this_df <- dplyr::bind_rows(this_df, temp_df)
+    df_list[[i_sheet]] <- temp_df
   }
 
+  this_df <- dplyr::bind_rows(df_list)
   return(this_df)
 
 }

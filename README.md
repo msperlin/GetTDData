@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![Codecov test
@@ -7,9 +8,6 @@ coverage](https://codecov.io/gh/msperlin/GetTDData/branch/master/graph/badge.svg
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R build
-(rcmdcheck)](https://github.com/msperlin/GetTDData/workflows/R-CMD-check/badge.svg)](https://github.com/msperlin/GetTDData/actions)
-
 <!-- badges: end -->
 
 # Package `GetTDData`
@@ -56,29 +54,29 @@ df_td <- td_get(assets,
 #> 
 #> ── Downloading TD files
 #> ℹ Downloading LTN_2020.xls
-#> ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2020.xls' is found, with size 176.1 kB.
+#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2020.xls' is found.
 #> ℹ Downloading LTN_2021.xls
-#> ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2021.xls' is found, with size 175.1 kB.
+#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2021.xls' is found.
 #> ℹ Downloading LTN_2022.xls
-#> ✔    '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2022.xls' is found, with size 175.6 kB.
+#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2022.xls' is found.
 #> 
 #> ── Checking files
 #> ✔ Found 3 files
 #> 
 #> ── Reading files
-#> ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2020.xls'
+#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2020.xls'
 #> ✔    Reading Sheet LTN 010121
 #> ✔    Reading Sheet LTN 010122
 #> ✔    Reading Sheet LTN 010123
 #> ✔    Reading Sheet LTN 010125
 #> ✔    Reading Sheet LTN 010126
-#> ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2021.xls'
+#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2021.xls'
 #> ✔    Reading Sheet LTN 010122
 #> ✔    Reading Sheet LTN 010123
 #> ✔    Reading Sheet LTN 010724
 #> ✔    Reading Sheet LTN 010125
 #> ✔    Reading Sheet LTN 010126
-#> ℹ Reading '/tmp/Rtmpf9eiRh/td-files/LTN/LTN_2022.xls'
+#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2022.xls'
 #> ✔    Reading Sheet LTN 010123
 #> ✔    Reading Sheet LTN 010724
 #> ✔    Reading Sheet LTN 010125
@@ -110,17 +108,12 @@ p <- ggplot(data = LTN,
             aes(x = as.Date(ref_date), 
                 y = price_bid, 
                 color = asset_code)) + 
-  geom_line(size = 1) + scale_x_date() + labs(title = '', x = 'Dates')
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-#> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
+  geom_line(linewidth = 1) + scale_x_date() + labs(title = '', x = 'Dates')
 
 print(p)
 ```
 
-<img src="man/figures/README-plot.prices-1.png" width="100%" />
+<img src="man/figures/README-plot.prices-1.png" alt="" width="100%" />
 
 ## Downloading the Brazilian Yield Curve
 

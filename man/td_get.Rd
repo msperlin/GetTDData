@@ -2,7 +2,7 @@
 % Please edit documentation in R/td_get.R
 \name{td_get}
 \alias{td_get}
-\title{Downloads data of Brazilian government bonds directly from the website}
+\title{Downloads data for Brazilian government bonds directly from the website}
 \usage{
 td_get(
   asset_codes = "LTN",
@@ -12,28 +12,29 @@ td_get(
 )
 }
 \arguments{
-\item{asset_codes}{Strings that identify the assets (1 or more assets) in the
-names of the excel files. E.g. asset_codes = 'LTN'. When set to NULL, it
-will download all available assets}
+\item{asset_codes}{A character vector identifying the assets (one or more) in the
+names of the Excel files (e.g., 'LTN'). If `NULL`, downloads all available assets.}
 
-\item{first_year}{first year of data (minimum of 2015)}
+\item{first_year}{The first year of data (minimum of 2005).}
 
-\item{last_year}{first year of data}
+\item{last_year}{The last year of data.}
 
-\item{dl_folder}{Name of folder to save excel files from tesouro direto (will
-create if it does not exists)}
+\item{dl_folder}{Path of the folder to save Excel files from Tesouro Direto (will
+create if it does not exist). Defaults to a session-temporary directory.
+To avoid redownloading files across different R sessions, you can pass a
+persistent path (e.g., a local folder path, or using tools::R_user_dir("GetTDData", which = "cache")).}
 }
 \value{
-TRUE if successful
+A data frame containing the asset data (prices and yields).
 }
 \description{
-This function looks into the tesouro direto website
-(https://www.tesourodireto.com.br/) and
-downloads all of the files containing prices and yields of government bonds.
-You can use input asset_codes to restrict the downloads to specific bonds
+This function looks into the Tesouro Direto website
+(<https://www.tesourodireto.com.br/>) and
+downloads all files containing prices and yields of government bonds.
+You can use the input `asset_codes` to restrict the downloads to specific bonds.
 }
 \examples{
 \dontrun{
-td_get("LTN", 2020, 2022)
+df_td <- td_get("LTN", 2020, 2022)
 }
 }

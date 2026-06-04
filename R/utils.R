@@ -1,7 +1,6 @@
-#' Returns available nammes at TD site
+#' Returns the available asset names at the Tesouro Direto (TD) website
 #'
-#' @return string vector
-#'
+#' @return A character vector of names.
 #' @export
 #'
 #' @examples
@@ -12,9 +11,9 @@ get_td_names <- function() {
   return(possible.names)
 }
 
-#' Returns cache directory
+#' Returns the cache directory path
 #'
-#' @return a path
+#' @return A character string representing the folder path.
 #'
 #' @export
 #'

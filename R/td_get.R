@@ -1,24 +1,25 @@
-#' Downloads data of Brazilian government bonds directly from the website
+#' Downloads data for Brazilian government bonds directly from the website
 #'
-#' This function looks into the tesouro direto website
-#' (https://www.tesourodireto.com.br/) and
-#' downloads all of the files containing prices and yields of government bonds.
-#' You can use input asset_codes to restrict the downloads to specific bonds
+#' This function looks into the Tesouro Direto website
+#' (<https://www.tesourodireto.com.br/>) and
+#' downloads all files containing prices and yields of government bonds.
+#' You can use the input `asset_codes` to restrict the downloads to specific bonds.
 #'
-#' @param asset_codes Strings that identify the assets (1 or more assets) in the
-#'   names of the excel files. E.g. asset_codes = 'LTN'. When set to NULL, it
-#'   will download all available assets
-#' @param first_year first year of data (minimum of 2015)
-#' @param last_year first year of data
-#' @param dl_folder Name of folder to save excel files from tesouro direto (will
-#'   create if it does not exists)
+#' @param asset_codes A character vector identifying the assets (one or more) in the
+#'   names of the Excel files (e.g., 'LTN'). If `NULL`, downloads all available assets.
+#' @param first_year The first year of data (minimum of 2005).
+#' @param last_year The last year of data.
+#' @param dl_folder Path of the folder to save Excel files from Tesouro Direto (will
+#'   create if it does not exist). Defaults to a session-temporary directory.
+#'   To avoid redownloading files across different R sessions, you can pass a
+#'   persistent path (e.g., a local folder path, or using tools::R_user_dir("GetTDData", which = "cache")).
 #'
-#' @return TRUE if successful
+#' @return A data frame containing the asset data (prices and yields).
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' td_get("LTN", 2020, 2022)
+#' df_td <- td_get("LTN", 2020, 2022)
 #' }
 td_get <- function(asset_codes = 'LTN',
                    first_year = 2005,
@@ -61,9 +62,7 @@ td_get <- function(asset_codes = 'LTN',
   dl_grid <- tidyr::expand_grid(asset_codes, vec_years)
 
   cli::cli_h3('Downloading TD files')
-  purrr::walk2(dl_grid$asset_codes, dl_grid$vec_years,
-               .f = download_td_file,
-               dl_folder = dl_folder)
+  download_td_files_parallel(dl_grid$asset_codes, dl_grid$vec_years, dl_folder = dl_folder)
 
   cli::cli_h3('Checking files')
   asset_folder <- stringr::str_glue(
@@ -81,15 +80,33 @@ td_get <- function(asset_codes = 'LTN',
 
   cli::cli_h3('Reading files')
 
-  df_td <- purrr::map_dfr(local_files,
-                          read_td_file)
+  # Set up parallel execution if multiple cores are available
+  n_cores <- parallel::detectCores() - 1
+  if (is.na(n_cores) || n_cores < 1) n_cores <- 1
+  n_cores <- min(n_cores, 4) # Limit to 4 to avoid overhead
+
+  if (n_cores > 1) {
+    cl <- parallel::makeCluster(n_cores)
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+    parallel::clusterExport(cl, c("read_td_file", "clean_td_data", "get_matur", "fix_td_names"), envir = asNamespace("GetTDData"))
+    parallel::clusterEvalQ(cl, {
+      library(readxl)
+      library(dplyr)
+      library(tibble)
+      library(stringr)
+    })
+    res_list <- parallel::parLapply(cl, local_files, read_td_file)
+  } else {
+    res_list <- lapply(local_files, read_td_file)
+  }
+
+  df_td <- dplyr::bind_rows(res_list)
 
   df_td <- df_td[stats::complete.cases(df_td), ]
 
   df_td$asset_code <- fix_td_names(df_td$asset_code)
 
-  df_td$matur_date <- as.Date(sapply(df_td$asset_code, get_matur),
-                              origin = '1970-01-01' )
+  df_td$matur_date <- get_matur(df_td$asset_code)
 
   # clean up zero value prices
   col_classes <- sapply(df_td, class)

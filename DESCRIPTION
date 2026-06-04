@@ -16,7 +16,6 @@ BugReports: https://github.com/msperlin/GetTDData/issues/
 URL: https://github.com/msperlin/GetTDData/,
     https://msperlin.github.io/GetTDData/
 LazyData: false
-RoxygenNote: 7.3.2
 Encoding: UTF-8
 Suggests: 
     knitr,
@@ -25,3 +24,4 @@ Suggests:
     ggplot2,
     covr,
     lubridate
+Config/roxygen2/version: 8.0.0
