@@ -53,35 +53,13 @@ df_td <- td_get(assets,
                 last_year)
 #> 
 #> ── Downloading TD files
-#> ℹ Downloading LTN_2020.xls
-#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2020.xls' is found.
-#> ℹ Downloading LTN_2021.xls
-#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2021.xls' is found.
-#> ℹ Downloading LTN_2022.xls
-#> ✔    '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2022.xls' is found.
+#> ℹ Downloading 3 files in parallel...
+#> ✔ All downloads completed successfully.
 #> 
 #> ── Checking files
 #> ✔ Found 3 files
 #> 
 #> ── Reading files
-#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2020.xls'
-#> ✔    Reading Sheet LTN 010121
-#> ✔    Reading Sheet LTN 010122
-#> ✔    Reading Sheet LTN 010123
-#> ✔    Reading Sheet LTN 010125
-#> ✔    Reading Sheet LTN 010126
-#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2021.xls'
-#> ✔    Reading Sheet LTN 010122
-#> ✔    Reading Sheet LTN 010123
-#> ✔    Reading Sheet LTN 010724
-#> ✔    Reading Sheet LTN 010125
-#> ✔    Reading Sheet LTN 010126
-#> ℹ Reading '/tmp/Rtmpc1MWKE/td-files/LTN/LTN_2022.xls'
-#> ✔    Reading Sheet LTN 010123
-#> ✔    Reading Sheet LTN 010724
-#> ✔    Reading Sheet LTN 010125
-#> ✔    Reading Sheet LTN 010126
-#> ✔    Reading Sheet LTN 010129
 ```
 
 Let’s plot the prices to check if the code worked:
@@ -117,7 +95,7 @@ print(p)
 
 ## Downloading the Brazilian Yield Curve
 
-The latest version of `GetTDData` offers function `get.yield.curve` to
+The latest version of `GetTDData` offers function `get_yield_curve` to
 download the current Brazilian yield curve directly from Anbima. The
 yield curve is a tool of financial analysts that show, based on current
 prices of fixed income instruments, how the market perceives the future
@@ -126,21 +104,19 @@ the use and definition of a yield curve in
 \[Investopedia\]\[<https://www.investopedia.com/terms/y/yieldcurve.asp>\].
 
 ``` r
-library(GetTDData)
-
-df.yield <- get.yield.curve()  
-str(df.yield)
+df_yield <- get_yield_curve()  
+str(df_yield)
 ```
 
-And we can plot it for the derised result:
+And we can plot it for the desired result:
 
 ``` r
 library(ggplot2)
 
-p <- ggplot(df.yield, aes(x=ref.date, y = value) ) +
+p <- ggplot(df_yield, aes(x=ref.date, y = value) ) +
   geom_line(size=1) + geom_point() + facet_grid(~type, scales = 'free') + 
   labs(title = paste0('The current Brazilian Yield Curve '),
-       subtitle = paste0('Date: ', df.yield$current.date[1]))     
+       subtitle = paste0('Date: ', df_yield$current.date[1]))     
 
 print(p)
 ```

@@ -47,7 +47,7 @@ test_that(desc = 'td_get() -- by asset ',{
 
   available_assets <- get_td_names()
 
-  last_year <- lubridate::year(Sys.Date()) - 1
+  last_year <- as.numeric(format(Sys.Date(), "%Y")) - 1
 
   for (i_asset in available_assets) {
     df_temp <- td_get(i_asset,

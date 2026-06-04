@@ -3,6 +3,7 @@
 export(get.yield.curve)
 export(get_cache_folder)
 export(get_td_names)
+export(get_yield_curve)
 export(td_get)
 export(td_get_current)
 import(rvest)

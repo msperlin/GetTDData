@@ -8,21 +8,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' df.yield <- get.yield.curve()
-#' str(df.yield)
+#' df_yield <- get_yield_curve()
+#' str(df_yield)
 #' }
-get.yield.curve <- function(){
+get_yield_curve <- function(){
 
-  # message and return empty df (FIXED)
-  # my.msg <- paste0('The previous Anbima site is no longer available. Data about ',
-  #                  'the yield curve cannot be scrapped from the site, meaning that ',
-  #                  'this function is no longer working. An alternative (and free) source of brazilian yield data is ',
-  #                  'being searched. If you know one, please drop an email at marceloperlin@gmail.com. \n\n',
-  #                  'Returning an empty dataframe.')
-  # message(my.msg)
-  #return(data.frame())
-
-  # NEW CODE
   my_html <- read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
   my_tab <-  my_html %>%
     html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
@@ -46,19 +36,14 @@ get.yield.curve <- function(){
                       stringsAsFactors = F)
 
   n.biz.days <- NULL
-  df_yc <- tidyr::gather(data = df_yc, 'type', value = 'value', -n.biz.days )
+  df_yc <- tidyr::pivot_longer(
+    data = df_yc,
+    cols = -n.biz.days,
+    names_to = "type",
+    values_to = "value"
+  )
 
   df_yc <- df_yc[df_yc$value!='',]
-
-  # also get additional, short term, data for expected nominal returns
-  # temp <- my.l[[11-3]]
-  # temp.nrow <- nrow(temp)
-  #
-  # df <- rbind(df, data.frame(n.biz.days = c(as.character(temp[[1]][3:temp.nrow]),
-  #                                       as.character(temp[[3]][3:temp.nrow])),
-  #                            type = rep ('nominal_return', temp.nrow*2-4),
-  #                            value = c(as.character(temp[[2]][3:temp.nrow]),
-  #                                      as.character(temp[[4]][3:temp.nrow]))) )
 
   # fix cols
   my.fix.fct <- function(x) {
@@ -87,5 +72,12 @@ get.yield.curve <- function(){
 
   return(df_yc)
 
+}
+
+#' @rdname get_yield_curve
+#' @export
+get.yield.curve <- function() {
+  .Deprecated("get_yield_curve")
+  return(get_yield_curve())
 }
 

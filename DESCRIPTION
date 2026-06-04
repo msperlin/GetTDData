@@ -9,7 +9,7 @@ Imports: stringr, readxl, utils,
          stats, curl, bizdays, 
          tidyr, rvest, xml2, 
          dplyr, fs,
-         cli, purrr, 
+         cli,
          tibble, jsonlite
 License: MIT + file LICENSE
 BugReports: https://github.com/msperlin/GetTDData/issues/
@@ -22,6 +22,5 @@ Suggests:
     rmarkdown,
     testthat,
     ggplot2,
-    covr,
-    lubridate
+    covr
 Config/roxygen2/version: 8.0.0
