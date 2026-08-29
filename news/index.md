@@ -1,6 +1,44 @@
 # Changelog
 
+## Version 1.7.0 (2026-08-29)
+
+- restored and fixed
+  [`td_get_current()`](https://msperlin.github.io/GetTDData/reference/td_get_current.md)
+  to reliably fetch daily current prices and yields from Tesouro Direto
+  using current-year asset files
+- added
+  [`get_asset_info()`](https://msperlin.github.io/GetTDData/reference/get_asset_info.md)
+  helper function providing bond metadata (indexer, coupon structure,
+  descriptions)
+- added visualization functions
+  [`plot_yield_curve()`](https://msperlin.github.io/GetTDData/reference/plot_yield_curve.md)
+  and
+  [`plot_td_series()`](https://msperlin.github.io/GetTDData/reference/plot_td_series.md)
+  built on `ggplot2`
+- added `.rds` file caching for parsed Excel files to accelerate data
+  loading on repeat reads
+- added option for user-persistent caching in
+  [`get_cache_folder()`](https://msperlin.github.io/GetTDData/reference/get_cache_folder.md)
+  via [`tools::R_user_dir`](https://rdrr.io/r/tools/userdir.html) or
+  `options(GetTDData.persistent_cache = TRUE)`
+- standardized all function outputs
+  ([`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md),
+  [`get_yield_curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md),
+  [`td_get_current()`](https://msperlin.github.io/GetTDData/reference/td_get_current.md))
+  to return `tibble` data frames (`tbl_df`)
+- updated
+  [`get_td_names()`](https://msperlin.github.io/GetTDData/reference/get_td_names.md)
+  with support for `NTN-B1` (covering RendA+ and Educa+ instruments) and
+  optional `online` CDN check
+- fixed dead `return(TRUE)` statement in
+  [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
+- guarded
+  [`covr::in_covr()`](http://covr.r-lib.org/reference/in_covr.md) checks
+  in test suite to prevent test failures when `covr` package is missing
+
 ## Version 1.6.0 (2026-06-04)
+
+CRAN release: 2026-06-04
 
 - implemented parallel file downloading using
   [`curl::multi_download`](https://jeroen.r-universe.dev/curl/reference/multi_download.html)

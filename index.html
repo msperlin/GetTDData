@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,13 @@
 <p>The latest version of <code>GetTDData</code> offers function <code>get_yield_curve</code> to download the current Brazilian yield curve directly from Anbima. The yield curve is a tool of financial analysts that show, based on current prices of fixed income instruments, how the market perceives the future real, nominal and inflation returns. You can find more details regarding the use and definition of a yield curve in [Investopedia][<a href="https://www.investopedia.com/terms/y/yieldcurve.asp" class="external-link uri">https://www.investopedia.com/terms/y/yieldcurve.asp</a>].</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_yield_curve.html">get_yield_curve</a></span><span class="op">(</span><span class="op">)</span>  </span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">df_yield</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">df_yield</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [104 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ n_biz_days  : num [1:104] 252 252 252 378 378 378 504 504 504 630 ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:104] "real_return" "nominal_return" "implicit_inflation" "real_return" ...</span></span>
+<span><span class="co">#&gt;  $ value       : num [1:104] 7.09 13.57 6.05 7.56 13.83 ...</span></span>
+<span><span class="co">#&gt;  $ ref_date    : Date[1:104], format: "2027-09-01" "2027-09-01" ...</span></span>
+<span><span class="co">#&gt;  $ current_date: Date[1:104], format: "2026-08-28" "2026-08-28" ...</span></span></code></pre></div>
 <p>And we can plot it for the desired result:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -129,8 +135,14 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="op">~</span><span class="va">type</span>, scales <span class="op">=</span> <span class="st">'free'</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'The current Brazilian Yield Curve '</span><span class="op">)</span>,</span>
 <span>       subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'Date: '</span>, <span class="va">df_yield</span><span class="op">$</span><span class="va">current_date</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>     </span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once per session.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" alt="" width="100%"></p>
 </div>
 </div>
 
@@ -183,7 +195,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

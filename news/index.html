@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GetTDData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0" id="version-160-2026-06-04">Version 1.6.0 (2026-06-04)<a class="anchor" aria-label="anchor" href="#version-160-2026-06-04"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.7.0" id="version-170-2026-08-29">Version 1.7.0 (2026-08-29)<a class="anchor" aria-label="anchor" href="#version-170-2026-08-29"></a></h2>
+<ul><li>restored and fixed <code><a href="../reference/td_get_current.html">td_get_current()</a></code> to reliably fetch daily current prices and yields from Tesouro Direto using current-year asset files</li>
+<li>added <code><a href="../reference/get_asset_info.html">get_asset_info()</a></code> helper function providing bond metadata (indexer, coupon structure, descriptions)</li>
+<li>added visualization functions <code><a href="../reference/plot_yield_curve.html">plot_yield_curve()</a></code> and <code><a href="../reference/plot_td_series.html">plot_td_series()</a></code> built on <code>ggplot2</code>
+</li>
+<li>added <code>.rds</code> file caching for parsed Excel files to accelerate data loading on repeat reads</li>
+<li>added option for user-persistent caching in <code><a href="../reference/get_cache_folder.html">get_cache_folder()</a></code> via <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir</a></code> or <code>options(GetTDData.persistent_cache = TRUE)</code>
+</li>
+<li>standardized all function outputs (<code><a href="../reference/td_get.html">td_get()</a></code>, <code><a href="../reference/get_yield_curve.html">get_yield_curve()</a></code>, <code><a href="../reference/td_get_current.html">td_get_current()</a></code>) to return <code>tibble</code> data frames (<code>tbl_df</code>)</li>
+<li>updated <code><a href="../reference/get_td_names.html">get_td_names()</a></code> with support for <code>NTN-B1</code> (covering RendA+ and Educa+ instruments) and optional <code>online</code> CDN check</li>
+<li>fixed dead <code>return(TRUE)</code> statement in <code><a href="../reference/td_get.html">td_get()</a></code>
+</li>
+<li>guarded <code><a href="http://covr.r-lib.org/reference/in_covr.html" class="external-link">covr::in_covr()</a></code> checks in test suite to prevent test failures when <code>covr</code> package is missing</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.6.0" id="version-160-2026-06-04">Version 1.6.0 (2026-06-04)<a class="anchor" aria-label="anchor" href="#version-160-2026-06-04"></a></h2><p class="text-muted">CRAN release: 2026-06-04</p>
 <ul><li>implemented parallel file downloading using <code><a href="https://jeroen.r-universe.dev/curl/reference/multi_download.html" class="external-link">curl::multi_download</a></code> to speed up asset fetching</li>
 <li>implemented safe parallel sheet parsing using socket clusters (<code>makeCluster</code> and <code>parLapply</code>), improving read speed and preventing C++ fork deadlocks</li>
 <li>optimized sheet-reading loop by accumulating data frames in a list and calling <code>bind_rows</code> once</li>
@@ -162,7 +177,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
