@@ -1,36 +1,43 @@
-#' Returns current TD prices
+#' Returns current TD prices and yields
 #'
-#' Fetches current prices of Tesouro Direto (TD) assets from the website's JSON API at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>.
+#' Fetches current prices and yields of Tesouro Direto (TD) assets by downloading the latest daily data available from the website.
 #'
-#' @return A data frame with prices.
+#' @param asset_codes A character vector identifying the assets (e.g., 'LTN', 'NTN-B'). If `NULL`, returns all available assets.
+#' @param dl_folder Path of the folder to save Excel files from Tesouro Direto. Defaults to a session-temporary directory.
+#'
+#' @return A tibble with current asset prices, yields, and maturity dates.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' df_current <- td_get_current()
+#' head(df_current)
 #' }
-td_get_current <- function() {
+td_get_current <- function(asset_codes = NULL, dl_folder = get_cache_folder()) {
 
-  cli::cli_alert_info("fetching current TD prices")
+  cli::cli_alert_info("Fetching current TD prices and yields...")
 
-  # 20240820: error on call: HTTP status was '403 Forbidden
-  cli::cli_alert_danger("20240820: The json endpoint for current TD prices is now forbidden. Returning empty dataframe. ")
-  return(dplyr::tibble())
+  current_year <- as.numeric(format(Sys.Date(), "%Y"))
 
-  url <- "https://www.tesourodireto.com.br/json/br/com/b3/tesourodireto/service/api/treasurybondsinfo.json"
-  l_out <- jsonlite::fromJSON(url)
+  df_td <- td_get(
+    asset_codes = asset_codes,
+    first_year = current_year,
+    last_year = current_year,
+    dl_folder = dl_folder
+  )
 
-  df_current <- l_out$response$TrsrBdTradgList$TrsrBd |>
-    dplyr::mutate(maturity = as.Date(mtrtyDt),
-                  name = nm,
-                  min_qtd = minRedQty,
-                  min_value = minRedVal,
-                  price = untrRedVal,
-                  annual_ret = anulRedRate/100) |>
-    dplyr::select(name, maturity, min_qtd, min_value,
-                  price, annual_ret)
+  if (nrow(df_td) == 0) {
+    cli::cli_alert_warning("No data found for the current year.")
+    return(tibble::tibble())
+  }
 
-  cli::cli_alert_success("got dataframe with {nrow(df_current)} rows and {ncol(df_current)} columns")
+  latest_date <- max(df_td$ref_date, na.rm = TRUE)
+  df_current <- df_td |>
+    dplyr::filter(.data$ref_date == latest_date)
 
-  return(df_current)
+  cli::cli_alert_success(
+    "Got {nrow(df_current)} current asset prices for reference date {latest_date}"
+  )
+
+  return(tibble::as_tibble(df_current))
 }

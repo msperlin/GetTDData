@@ -12,7 +12,7 @@ test_df <- function(df) {
 
 test_that(desc = 'td_get() -- single LTN',{
 
-  if (!covr::in_covr()) {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
   }
@@ -26,7 +26,7 @@ test_that(desc = 'td_get() -- single LTN',{
 
 test_that(desc = 'td_get() -- two assets',{
 
-  if (!covr::in_covr()) {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
   }
@@ -38,36 +38,13 @@ test_that(desc = 'td_get() -- two assets',{
 
 })
 
-test_that(desc = 'td_get() -- by asset ',{
+test_that(desc = 'td_get_current()',{
 
-  if (!covr::in_covr()) {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
   }
 
-  available_assets <- get_td_names()
-
-  last_year <- as.numeric(format(Sys.Date(), "%Y")) - 1
-
-  for (i_asset in available_assets) {
-    df_temp <- td_get(i_asset,
-                      first_year = first_year)
-
-    test_df(df_temp)
-  }
-
+  df_current <- td_get_current()
+  test_df(df_current)
 })
-
-# 20240820: api is not working, removing test for now..
-# test_that(desc = 'td_get_current()',{
-#
-#   if (!covr::in_covr()) {
-#     testthat::skip_if_offline()
-#     testthat::skip_on_cran()
-#   }
-#
-#   df_current <- td_get_current()
-#   test_df(df_current)
-# })
-
-

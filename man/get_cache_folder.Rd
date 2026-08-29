@@ -4,7 +4,10 @@
 \alias{get_cache_folder}
 \title{Returns the cache directory path}
 \usage{
-get_cache_folder()
+get_cache_folder(persistent = getOption("GetTDData.persistent_cache", FALSE))
+}
+\arguments{
+\item{persistent}{Logical. If `TRUE`, uses a user-persistent directory via `tools::R_user_dir`. If `FALSE`, defaults to session temporary directory. Can also be set globally via `options(GetTDData.persistent_cache = TRUE)`. Defaults to `FALSE`.}
 }
 \value{
 A character string representing the folder path.

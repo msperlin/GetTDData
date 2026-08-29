@@ -106,6 +106,12 @@ the use and definition of a yield curve in
 ``` r
 df_yield <- get_yield_curve()  
 str(df_yield)
+#> tibble [104 × 5] (S3: tbl_df/tbl/data.frame)
+#>  $ n_biz_days  : num [1:104] 252 252 252 378 378 378 504 504 504 630 ...
+#>  $ type        : chr [1:104] "real_return" "nominal_return" "implicit_inflation" "real_return" ...
+#>  $ value       : num [1:104] 7.09 13.57 6.05 7.56 13.83 ...
+#>  $ ref_date    : Date[1:104], format: "2027-09-01" "2027-09-01" ...
+#>  $ current_date: Date[1:104], format: "2026-08-28" "2026-08-28" ...
 ```
 
 And we can plot it for the desired result:
@@ -117,6 +123,13 @@ p <- ggplot(df_yield, aes(x=ref_date, y = value) ) +
   geom_line(size=1) + geom_point() + facet_grid(~type, scales = 'free') + 
   labs(title = paste0('The current Brazilian Yield Curve '),
        subtitle = paste0('Date: ', df_yield$current_date[1]))     
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 
 print(p)
 ```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="100%" />

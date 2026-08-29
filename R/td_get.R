@@ -69,7 +69,7 @@ td_get <- function(asset_codes = 'LTN',
     "{dl_folder}/{asset_codes}"
   )
 
-  local_files <- fs::dir_ls(asset_folder)
+  local_files <- fs::dir_ls(asset_folder, regexp = "\\.xls$")
 
   n_files <- length(local_files)
   cli::cli_alert_success("Found {n_files} files")
@@ -120,8 +120,5 @@ td_get <- function(asset_codes = 'LTN',
 
   df_td <- df_td[!idx, ]
 
-  return(df_td)
-
-  return(TRUE)
-
+  return(tibble::as_tibble(df_td))
 }

@@ -114,9 +114,13 @@ download_td_files_parallel <- function(asset_codes, years, dl_folder) {
     failed_idx <- dl_status$status_code != 200
     if (any(failed_idx)) {
       failed_urls <- urls_to_dl[failed_idx]
+      failed_dests <- dests_to_dl[failed_idx]
       cli::cli_alert_danger("Failed to download {sum(failed_idx)} files:")
       for (f_url in failed_urls) {
         cli::cli_alert_danger("  - {f_url}")
+      }
+      for (f_dest in failed_dests) {
+        if (fs::file_exists(f_dest)) fs::file_delete(f_dest)
       }
     } else {
       cli::cli_alert_success("All downloads completed successfully.")

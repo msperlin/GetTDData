@@ -4,7 +4,10 @@
 \alias{get_td_names}
 \title{Returns the available asset names at the Tesouro Direto (TD) website}
 \usage{
-get_td_names()
+get_td_names(online = FALSE)
+}
+\arguments{
+\item{online}{Logical. If `TRUE`, attempts to query the Tesouro Direto CDN server for live asset names. Defaults to `FALSE`.}
 }
 \value{
 A character vector of names.

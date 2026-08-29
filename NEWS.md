@@ -1,3 +1,14 @@
+## Version 1.7.0 (2026-08-29)
+  - restored and fixed `td_get_current()` to reliably fetch daily current prices and yields from Tesouro Direto using current-year asset files
+  - added `get_asset_info()` helper function providing bond metadata (indexer, coupon structure, descriptions)
+  - added visualization functions `plot_yield_curve()` and `plot_td_series()` built on `ggplot2`
+  - added `.rds` file caching for parsed Excel files to accelerate data loading on repeat reads
+  - added option for user-persistent caching in `get_cache_folder()` via `tools::R_user_dir` or `options(GetTDData.persistent_cache = TRUE)`
+  - standardized all function outputs (`td_get()`, `get_yield_curve()`, `td_get_current()`) to return `tibble` data frames (`tbl_df`)
+  - updated `get_td_names()` with support for `NTN-B1` (covering RendA+ and Educa+ instruments) and optional `online` CDN check
+  - fixed dead `return(TRUE)` statement in `td_get()`
+  - guarded `covr::in_covr()` checks in test suite to prevent test failures when `covr` package is missing
+
 ## Version 1.6.0 (2026-06-04)
   - implemented parallel file downloading using `curl::multi_download` to speed up asset fetching
   - implemented safe parallel sheet parsing using socket clusters (`makeCluster` and `parLapply`), improving read speed and preventing C++ fork deadlocks

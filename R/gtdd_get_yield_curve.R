@@ -70,8 +70,7 @@ get_yield_curve <- function(){
                                          cal = cal)
   df_yc$current_date <- date_now
 
-  return(df_yc)
-
+  return(tibble::as_tibble(df_yc))
 }
 
 #' @rdname get_yield_curve

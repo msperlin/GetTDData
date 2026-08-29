@@ -2,18 +2,24 @@
 % Please edit documentation in R/td_get_current.R
 \name{td_get_current}
 \alias{td_get_current}
-\title{Returns current TD prices}
+\title{Returns current TD prices and yields}
 \usage{
-td_get_current()
+td_get_current(asset_codes = NULL, dl_folder = get_cache_folder())
+}
+\arguments{
+\item{asset_codes}{A character vector identifying the assets (e.g., 'LTN', 'NTN-B'). If `NULL`, returns all available assets.}
+
+\item{dl_folder}{Path of the folder to save Excel files from Tesouro Direto. Defaults to a session-temporary directory.}
 }
 \value{
-A data frame with prices.
+A tibble with current asset prices, yields, and maturity dates.
 }
 \description{
-Fetches current prices of Tesouro Direto (TD) assets from the website's JSON API at <https://www.tesourodireto.com.br/titulos/precos-e-taxas.htm>.
+Fetches current prices and yields of Tesouro Direto (TD) assets by downloading the latest daily data available from the website.
 }
 \examples{
 \dontrun{
 df_current <- td_get_current()
+head(df_current)
 }
 }

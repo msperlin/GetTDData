@@ -1,6 +1,6 @@
 test_that('Test of get_yield_curve() and get.yield.curve()',{
 
-  if (!covr::in_covr()) {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
   }
