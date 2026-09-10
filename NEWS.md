@@ -1,7 +1,7 @@
 ## Version 1.7.1 (2026-09-10)
   - added `td_get2()` to retrieve bond data from the Tesouro Transparente CKAN portal (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>) with columns matching `td_get()`
   - updated `td_get_current()` to use `td_get2()` and fetch live daily prices without deprecation warnings
-  - fixed `get_yield_curve()` (and `get.yield.curve()`) on Windows by using browser request headers, an SSL certificate fallback, and sanitized date extraction to handle Windows CRLF line endings
+  - fixed `get_yield_curve()` (and `get.yield.curve()`) on Windows by specifying `Latin1` encoding when parsing Anbima HTML tables, adding browser request headers, an SSL certificate fallback, and sanitized date extraction
   - deprecated `td_get()` using `lifecycle::deprecate_warn()` due to the closure of the Tesouro Direto data application in August 2026; users should use `td_get2()`
 
 ## Version 1.7.0 (2026-08-29)

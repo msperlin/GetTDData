@@ -33,7 +33,7 @@ get_yield_curve <- function(){
     curl::curl_fetch_memory(my_url, handle = h)
   })
 
-  my_html <- rvest::read_html(req$content)
+  my_html <- rvest::read_html(req$content, encoding = "Latin1")
   my_tab <-  my_html %>%
     html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
     html_table(fill = TRUE )
