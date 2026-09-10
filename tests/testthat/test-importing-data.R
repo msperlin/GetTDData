@@ -17,8 +17,11 @@ test_that(desc = 'td_get() -- single LTN',{
     testthat::skip_on_cran()
   }
 
-  df_ltn <- td_get(asset_codes = 'LTN',
-                   first_year = first_year)
+  expect_warning(
+    df_ltn <- td_get(asset_codes = 'LTN',
+                     first_year = first_year),
+    class = "lifecycle_warning_deprecated"
+  )
 
   test_df(df_ltn)
 
@@ -47,4 +50,24 @@ test_that(desc = 'td_get_current()',{
 
   df_current <- td_get_current()
   test_df(df_current)
+})
+
+test_that("td_get() deprecation warning conveys closure, August 2026, and td_get2()", {
+  op <- options(lifecycle_verbosity = "warning")
+  on.exit(options(op))
+
+  warn_msg <- NULL
+  withCallingHandlers(
+    tryCatch(td_get(asset_codes = "INVALID_ASSET"), error = function(e) NULL),
+    lifecycle_warning_deprecated = function(cnd) {
+      warn_msg <<- conditionMessage(cnd)
+      invokeRestart("muffleWarning")
+    }
+  )
+
+  expect_false(is.null(warn_msg))
+  expect_match(warn_msg, "deprecated")
+  expect_match(warn_msg, "td_get2\\(\\)")
+  expect_match(warn_msg, "August 2026")
+  expect_match(warn_msg, "desativacao-do-aplicativo-a-partir-de-17-de-agosto")
 })

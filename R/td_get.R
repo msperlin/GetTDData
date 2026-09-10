@@ -1,9 +1,15 @@
 #' Downloads data for Brazilian government bonds directly from the website
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
 #' This function looks into the Tesouro Direto website
 #' (<https://www.tesourodireto.com.br/>) and
 #' downloads all files containing prices and yields of government bonds.
 #' You can use the input `asset_codes` to restrict the downloads to specific bonds.
+#'
+#' Due to the closure of the Tesouro Direto data application in August 2026,
+#' `td_get()` is deprecated and resulting data will only go as far as August 2026.
+#' Users should use `td_get2()`, a new function that will be developed soon.
 #'
 #' @param asset_codes A character vector identifying the assets (one or more) in the
 #'   names of the Excel files (e.g., 'LTN'). If `NULL`, downloads all available assets.
@@ -15,6 +21,7 @@
 #'   persistent path (e.g., a local folder path, or using tools::R_user_dir("GetTDData", which = "cache")).
 #'
 #' @return A data frame containing the asset data (prices and yields).
+#' @importFrom lifecycle deprecate_warn
 #' @export
 #'
 #' @examples
@@ -25,6 +32,17 @@ td_get <- function(asset_codes = 'LTN',
                    first_year = 2005,
                    last_year = as.numeric(format(Sys.Date(), "%Y")),
                    dl_folder = get_cache_folder()) {
+
+  lifecycle::deprecate_warn(
+    when = "1.7.1",
+    what = "td_get()",
+    with = "td_get2()",
+    details = c(
+      "The Tesouro Direto data application was shut down in August 2026 (see <https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/julho/tesouro-direto-informa-desativacao-do-aplicativo-a-partir-de-17-de-agosto>).",
+      "Resulting data will only go as far as August 2026.",
+      "Please note that `td_get2()` will be developed soon."
+    )
+  )
 
   # check years
   if (first_year < 2005) {

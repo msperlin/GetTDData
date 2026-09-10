@@ -28,10 +28,17 @@ persistent path (e.g., a local folder path, or using tools::R_user_dir("GetTDDat
 A data frame containing the asset data (prices and yields).
 }
 \description{
+`r lifecycle::badge("deprecated")`
+}
+\details{
 This function looks into the Tesouro Direto website
 (<https://www.tesourodireto.com.br/>) and
 downloads all files containing prices and yields of government bonds.
 You can use the input `asset_codes` to restrict the downloads to specific bonds.
+
+Due to the closure of the Tesouro Direto data application in August 2026,
+`td_get()` is deprecated and resulting data will only go as far as August 2026.
+Users should use `td_get2()`, a new function that will be developed soon.
 }
 \examples{
 \dontrun{
