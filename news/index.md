@@ -17,9 +17,9 @@
   [`get_yield_curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md)
   (and
   [`get.yield.curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md))
-  on Windows by using browser request headers, an SSL certificate
-  fallback, and sanitized date extraction to handle Windows CRLF line
-  endings
+  on Windows by specifying `Latin1` encoding when parsing Anbima HTML
+  tables, adding browser request headers, an SSL certificate fallback,
+  and sanitized date extraction
 - deprecated
   [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
   using

@@ -37,7 +37,7 @@
 <ul><li>added <code><a href="../reference/td_get2.html">td_get2()</a></code> to retrieve bond data from the Tesouro Transparente CKAN portal (<a href="https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/" class="external-link uri">https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/</a>) with columns matching <code><a href="../reference/td_get.html">td_get()</a></code>
 </li>
 <li>updated <code><a href="../reference/td_get_current.html">td_get_current()</a></code> to use <code><a href="../reference/td_get2.html">td_get2()</a></code> and fetch live daily prices without deprecation warnings</li>
-<li>fixed <code><a href="../reference/get_yield_curve.html">get_yield_curve()</a></code> (and <code><a href="../reference/get_yield_curve.html">get.yield.curve()</a></code>) on Windows by using browser request headers, an SSL certificate fallback, and sanitized date extraction to handle Windows CRLF line endings</li>
+<li>fixed <code><a href="../reference/get_yield_curve.html">get_yield_curve()</a></code> (and <code><a href="../reference/get_yield_curve.html">get.yield.curve()</a></code>) on Windows by specifying <code>Latin1</code> encoding when parsing Anbima HTML tables, adding browser request headers, an SSL certificate fallback, and sanitized date extraction</li>
 <li>deprecated <code><a href="../reference/td_get.html">td_get()</a></code> using <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_warn()</a></code> due to the closure of the Tesouro Direto data application in August 2026; users should use <code><a href="../reference/td_get2.html">td_get2()</a></code>
 </li>
 </ul></div>
