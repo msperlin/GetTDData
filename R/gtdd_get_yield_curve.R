@@ -13,19 +13,49 @@
 #' }
 get_yield_curve <- function(){
 
-  my_html <- read_html('https://www.anbima.com.br/informacoes/est-termo/CZ.asp')
+  if (!curl::has_internet()) {
+    stop("No internet connection found...")
+  }
+
+  my_url <- 'https://www.anbima.com.br/informacoes/est-termo/CZ.asp'
+  h <- curl::new_handle()
+  curl::handle_setheaders(h,
+    "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language" = "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+  )
+
+  req <- tryCatch({
+    curl::curl_fetch_memory(my_url, handle = h)
+  }, error = function(e) {
+    # Fallback for Windows machines with outdated root certificate stores
+    curl::handle_setopt(h, ssl_verifypeer = FALSE)
+    curl::curl_fetch_memory(my_url, handle = h)
+  })
+
+  my_html <- rvest::read_html(req$content)
   my_tab <-  my_html %>%
     html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
     html_table(fill = TRUE )
+
+  if (length(my_tab) == 0) {
+    cli::cli_abort("Could not find yield curve table on Anbima website.")
+  }
 
   df_yc <- my_tab[[1]]
 
   # get date
   my_xpath <- '//*[@id="Parametros"]/table/thead/tr/th[1]'
-  date_now <- my_html %>%
+  raw_date <- my_html %>%
     html_node(xpath = my_xpath) %>%
-    html_text() %>%
-    as.Date('%d/%m/%Y')
+    html_text(trim = TRUE)
+
+  date_str <- stringr::str_extract(raw_date, "\\d{2}/\\d{2}/\\d{4}")
+  date_now <- as.Date(date_str, format = '%d/%m/%Y')
+
+  if (is.na(date_now)) {
+    cli::cli_abort("Could not parse reference date from Anbima webpage: '{raw_date}'")
+  }
 
   # get yield curve data and organize it
   df_yc <- df_yc[2:nrow(df_yc), ]
