@@ -8,12 +8,24 @@
   (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>)
   with columns matching
   [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
+- updated
+  [`td_get_current()`](https://msperlin.github.io/GetTDData/reference/td_get_current.md)
+  to use
+  [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  and fetch live daily prices without deprecation warnings
+- fixed
+  [`get_yield_curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md)
+  (and
+  [`get.yield.curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md))
+  on Windows by using browser request headers, an SSL certificate
+  fallback, and sanitized date extraction to handle Windows CRLF line
+  endings
 - deprecated
   [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
   using
   [`lifecycle::deprecate_warn()`](https://lifecycle.r-lib.org/reference/deprecate_soft.html)
   due to the closure of the Tesouro Direto data application in August
-  2026; users should use upcoming
+  2026; users should use
   [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
 
 ## Version 1.7.0 (2026-08-29)
