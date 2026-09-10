@@ -51,8 +51,8 @@
 <div class="page-header"><h1 id="package-gettddata">Package <code>GetTDData</code>
 <a class="anchor" aria-label="anchor" href="#package-gettddata"></a>
 </h1></div>
-<p>Information regarding prices and yields of bonds issued by the Brazilian government can be downloaded manually as excel files from the <a href="https://www.tesourodireto.com.br/" class="external-link">Tesouro Direto website</a>. However, it is painful to aggregate all of this data into something useful as the several files don’t have an uniform format.</p>
-<p>Package <code>GetTDData</code> makes the process of importing data from Tesouro direto much easier. All that you need in order to download the data is the name of the assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F).</p>
+<p>Information regarding prices and yields of bonds issued by the Brazilian government can be downloaded from the official open data portal at <a href="https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/" class="external-link">Tesouro Transparente</a>. However, aggregating all of this historical data into a structured format can be challenging.</p>
+<p>Package <code>GetTDData</code> makes importing data from Tesouro Direto simple and fast. All you need to download bond data is the asset identifier (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F, NTN-B1, Educa+, RendA+). Function <code><a href="reference/td_get2.html">td_get2()</a></code> downloads directly from the official Tesouro Transparente CKAN open data repository.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -65,8 +65,8 @@
 <div class="section level2">
 <h2 id="how-to-use-gettddata">How to use GetTDData<a class="anchor" aria-label="anchor" href="#how-to-use-gettddata"></a>
 </h2>
-<p>Suppose you need financial data (prices and yields) for a bond of type LTN with a maturity (end of contract) at 2023-01-01. This bullet bond is the most basic debt contract the Brazilian government issues. It does not pay any value (coupon) during its lifetime and will pay 1000 R$ at maturity.</p>
-<p>In order to get the data, all you need to do is to run the following code in R:</p>
+<p>Suppose you need financial data (prices and yields) for a bond of type LTN with a maturity (end of contract) at 2023-01-01. This bullet bond is the most basic debt contract the Brazilian government issues. It does not pay any coupon during its lifetime and pays R$ 1,000 at maturity.</p>
+<p>In order to get the data, all you need to do is run the following code in R using <code><a href="reference/td_get2.html">td_get2()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/msperlin/GetTDData/" class="external-link">GetTDData</a></span><span class="op">)</span></span>
 <span></span>
@@ -74,18 +74,14 @@
 <span><span class="va">first_year</span> <span class="op">&lt;-</span> <span class="fl">2020</span></span>
 <span><span class="va">last_year</span> <span class="op">&lt;-</span> <span class="fl">2022</span></span>
 <span></span>
-<span><span class="va">df_td</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/td_get.html">td_get</a></span><span class="op">(</span><span class="va">assets</span>,</span>
-<span>                <span class="va">first_year</span>,</span>
-<span>                <span class="va">last_year</span><span class="op">)</span></span>
+<span><span class="va">df_td</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/td_get2.html">td_get2</a></span><span class="op">(</span><span class="va">assets</span>,</span>
+<span>                 <span class="va">first_year</span>,</span>
+<span>                 <span class="va">last_year</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Downloading TD files</span></span>
-<span><span class="co">#&gt; ℹ Downloading 3 files in parallel...</span></span>
-<span><span class="co">#&gt; ✔ All downloads completed successfully.</span></span>
+<span><span class="co">#&gt; ── Downloading TD data from Tesouro Transparente CKAN</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Checking files</span></span>
-<span><span class="co">#&gt; ✔ Found 3 files</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Reading files</span></span></code></pre></div>
+<span><span class="co">#&gt; ── Reading TD data</span></span>
+<span><span class="co">#&gt; ✔ Retrieved 3644 rows of TD data.</span></span></code></pre></div>
 <p>Let’s plot the prices to check if the code worked:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -121,12 +117,12 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_yield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_yield_curve.html">get_yield_curve</a></span><span class="op">(</span><span class="op">)</span>  </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">df_yield</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [104 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ n_biz_days  : num [1:104] 252 252 252 378 378 378 504 504 504 630 ...</span></span>
-<span><span class="co">#&gt;  $ type        : chr [1:104] "real_return" "nominal_return" "implicit_inflation" "real_return" ...</span></span>
-<span><span class="co">#&gt;  $ value       : num [1:104] 7.09 13.57 6.05 7.56 13.83 ...</span></span>
-<span><span class="co">#&gt;  $ ref_date    : Date[1:104], format: "2027-09-01" "2027-09-01" ...</span></span>
-<span><span class="co">#&gt;  $ current_date: Date[1:104], format: "2026-08-28" "2026-08-28" ...</span></span></code></pre></div>
+<span><span class="co">#&gt; tibble [103 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ n_biz_days  : num [1:103] 252 252 252 378 378 378 504 504 504 630 ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:103] "real_return" "nominal_return" "implicit_inflation" "real_return" ...</span></span>
+<span><span class="co">#&gt;  $ value       : num [1:103] 6.88 13.48 6.17 7.35 13.66 ...</span></span>
+<span><span class="co">#&gt;  $ ref_date    : Date[1:103], format: "2027-09-13" "2027-09-13" ...</span></span>
+<span><span class="co">#&gt;  $ current_date: Date[1:103], format: "2026-09-09" "2026-09-09" ...</span></span></code></pre></div>
 <p>And we can plot it for the desired result:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>

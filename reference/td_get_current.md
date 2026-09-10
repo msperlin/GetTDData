@@ -18,8 +18,8 @@ td_get_current(asset_codes = NULL, dl_folder = get_cache_folder())
 
 - dl_folder:
 
-  Path of the folder to save Excel files from Tesouro Direto. Defaults
-  to a session-temporary directory.
+  Path of the folder to save files. Defaults to a session-temporary
+  directory.
 
 ## Value
 
