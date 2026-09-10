@@ -3,7 +3,7 @@
 Information regarding prices and yields of bonds issued by the Brazilian
 government can be downloaded from the official open data portal at
 [Tesouro
-Transparente](https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/).
+Transparente](https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto).
 However, aggregating all of this historical data into a structured
 format can be challenging.
 

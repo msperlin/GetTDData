@@ -5,7 +5,7 @@
 - added
   [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
   to retrieve bond data from the Tesouro Transparente CKAN portal
-  (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>)
+  (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto>)
   with columns matching
   [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
 - updated
