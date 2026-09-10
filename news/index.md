@@ -1,6 +1,24 @@
 # Changelog
 
+## Version 1.7.1 (2026-09-10)
+
+- added
+  [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  to retrieve bond data from the Tesouro Transparente CKAN portal
+  (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>)
+  with columns matching
+  [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
+- deprecated
+  [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
+  using
+  [`lifecycle::deprecate_warn()`](https://lifecycle.r-lib.org/reference/deprecate_soft.html)
+  due to the closure of the Tesouro Direto data application in August
+  2026; users should use upcoming
+  [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+
 ## Version 1.7.0 (2026-08-29)
+
+CRAN release: 2026-08-29
 
 - restored and fixed
   [`td_get_current()`](https://msperlin.github.io/GetTDData/reference/td_get_current.md)

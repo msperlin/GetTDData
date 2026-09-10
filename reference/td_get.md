@@ -1,9 +1,6 @@
 # Downloads data for Brazilian government bonds directly from the website
 
-This function looks into the Tesouro Direto website
-(\<https://www.tesourodireto.com.br/\>) and downloads all files
-containing prices and yields of government bonds. You can use the input
-\`asset_codes\` to restrict the downloads to specific bonds.
+\`r lifecycle::badge("deprecated")\`
 
 ## Usage
 
@@ -43,6 +40,18 @@ td_get(
 ## Value
 
 A data frame containing the asset data (prices and yields).
+
+## Details
+
+This function looks into the Tesouro Direto website
+(\<https://www.tesourodireto.com.br/\>) and downloads all files
+containing prices and yields of government bonds. You can use the input
+\`asset_codes\` to restrict the downloads to specific bonds.
+
+Due to the closure of the Tesouro Direto data application in August
+2026, \`td_get()\` is deprecated and resulting data will only go as far
+as August 2026. Users should use \`td_get2()\`, a new function that will
+be developed soon.
 
 ## Examples
 

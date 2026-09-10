@@ -18,5 +18,8 @@
 - [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
   : Downloads data for Brazilian government bonds directly from the
   website
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  : Downloads data for Brazilian government bonds from Tesouro
+  Transparente (CKAN)
 - [`td_get_current()`](https://msperlin.github.io/GetTDData/reference/td_get_current.md)
   : Returns current TD prices and yields
