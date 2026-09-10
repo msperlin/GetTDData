@@ -39,8 +39,7 @@ td_get <- function(asset_codes = 'LTN',
     with = "td_get2()",
     details = c(
       "The Tesouro Direto data application was shut down in August 2026 (see <https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/julho/tesouro-direto-informa-desativacao-do-aplicativo-a-partir-de-17-de-agosto>).",
-      "Resulting data will only go as far as August 2026.",
-      "Please note that `td_get2()` will be developed soon."
+      "Resulting data will only go as far as August 2026."
     )
   )
 
