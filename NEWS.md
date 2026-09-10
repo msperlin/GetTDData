@@ -1,4 +1,5 @@
 ## Version 1.7.1 (2026-09-10)
+  - added `td_get2()` to retrieve bond data from the Tesouro Transparente CKAN portal (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>) with columns matching `td_get()`
   - deprecated `td_get()` using `lifecycle::deprecate_warn()` due to the closure of the Tesouro Direto data application in August 2026; users should use upcoming `td_get2()`
 
 ## Version 1.7.0 (2026-08-29)
