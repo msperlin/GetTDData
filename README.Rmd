@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # Package `GetTDData`
 
-Information regarding prices and yields of bonds issued by the Brazilian government can be downloaded from the official open data portal at [Tesouro Transparente](https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/). However, aggregating all of this historical data into a structured format can be challenging.
+Information regarding prices and yields of bonds issued by the Brazilian government can be downloaded from the official open data portal at [Tesouro Transparente](https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto). However, aggregating all of this historical data into a structured format can be challenging.
 
 Package `GetTDData` makes importing data from Tesouro Direto simple and fast. All you need to download bond data is the asset identifier (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F, NTN-B1, Educa+, RendA+). Function `td_get2()` downloads directly from the official Tesouro Transparente CKAN open data repository.
 
