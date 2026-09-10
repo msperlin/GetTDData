@@ -9,7 +9,7 @@ td_get_current(asset_codes = NULL, dl_folder = get_cache_folder())
 \arguments{
 \item{asset_codes}{A character vector identifying the assets (e.g., 'LTN', 'NTN-B'). If `NULL`, returns all available assets.}
 
-\item{dl_folder}{Path of the folder to save Excel files from Tesouro Direto. Defaults to a session-temporary directory.}
+\item{dl_folder}{Path of the folder to save files. Defaults to a session-temporary directory.}
 }
 \value{
 A tibble with current asset prices, yields, and maturity dates.

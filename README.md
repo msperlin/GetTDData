@@ -13,14 +13,17 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 # Package `GetTDData`
 
 Information regarding prices and yields of bonds issued by the Brazilian
-government can be downloaded manually as excel files from the [Tesouro
-Direto website](https://www.tesourodireto.com.br/). However, it is
-painful to aggregate all of this data into something useful as the
-several files don’t have an uniform format.
+government can be downloaded from the official open data portal at
+[Tesouro
+Transparente](https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/).
+However, aggregating all of this historical data into a structured
+format can be challenging.
 
-Package `GetTDData` makes the process of importing data from Tesouro
-direto much easier. All that you need in order to download the data is
-the name of the assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F).
+Package `GetTDData` makes importing data from Tesouro Direto simple and
+fast. All you need to download bond data is the asset identifier (LFT,
+LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F, NTN-B1, Educa+, RendA+).
+Function `td_get2()` downloads directly from the official Tesouro
+Transparente CKAN open data repository.
 
 ## Installation
 
@@ -35,11 +38,10 @@ the name of the assets (LFT, LTN, NTN-C, NTN-B, NTN-B Principal, NTN-F).
 Suppose you need financial data (prices and yields) for a bond of type
 LTN with a maturity (end of contract) at 2023-01-01. This bullet bond is
 the most basic debt contract the Brazilian government issues. It does
-not pay any value (coupon) during its lifetime and will pay 1000 R\$ at
-maturity.
+not pay any coupon during its lifetime and pays R\$ 1,000 at maturity.
 
-In order to get the data, all you need to do is to run the following
-code in R:
+In order to get the data, all you need to do is run the following code
+in R using `td_get2()`:
 
 ``` r
 library(GetTDData)
@@ -48,18 +50,14 @@ assets <- 'LTN'   # Identifier of assets
 first_year <- 2020
 last_year <- 2022
 
-df_td <- td_get(assets,
-                first_year,
-                last_year)
+df_td <- td_get2(assets,
+                 first_year,
+                 last_year)
 #> 
-#> ── Downloading TD files
-#> ℹ Downloading 3 files in parallel...
-#> ✔ All downloads completed successfully.
+#> ── Downloading TD data from Tesouro Transparente CKAN
 #> 
-#> ── Checking files
-#> ✔ Found 3 files
-#> 
-#> ── Reading files
+#> ── Reading TD data
+#> ✔ Retrieved 3644 rows of TD data.
 ```
 
 Let’s plot the prices to check if the code worked:
@@ -106,12 +104,12 @@ the use and definition of a yield curve in
 ``` r
 df_yield <- get_yield_curve()  
 str(df_yield)
-#> tibble [104 × 5] (S3: tbl_df/tbl/data.frame)
-#>  $ n_biz_days  : num [1:104] 252 252 252 378 378 378 504 504 504 630 ...
-#>  $ type        : chr [1:104] "real_return" "nominal_return" "implicit_inflation" "real_return" ...
-#>  $ value       : num [1:104] 7.09 13.57 6.05 7.56 13.83 ...
-#>  $ ref_date    : Date[1:104], format: "2027-09-01" "2027-09-01" ...
-#>  $ current_date: Date[1:104], format: "2026-08-28" "2026-08-28" ...
+#> tibble [103 × 5] (S3: tbl_df/tbl/data.frame)
+#>  $ n_biz_days  : num [1:103] 252 252 252 378 378 378 504 504 504 630 ...
+#>  $ type        : chr [1:103] "real_return" "nominal_return" "implicit_inflation" "real_return" ...
+#>  $ value       : num [1:103] 6.88 13.48 6.17 7.35 13.66 ...
+#>  $ ref_date    : Date[1:103], format: "2027-09-13" "2027-09-13" ...
+#>  $ current_date: Date[1:103], format: "2026-09-09" "2026-09-09" ...
 ```
 
 And we can plot it for the desired result:
