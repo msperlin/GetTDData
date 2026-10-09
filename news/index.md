@@ -2,6 +2,8 @@
 
 ## Version 1.7.1 (2026-09-10)
 
+CRAN release: 2026-09-10
+
 - added
   [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
   to retrieve bond data from the Tesouro Transparente CKAN portal
