@@ -7,7 +7,7 @@ Depends:
     R (>= 4.1.0)
 Imports: stringr, readxl, utils, 
          stats, curl, bizdays, 
-         tidyr, rvest, xml2, 
+         tidyr, rvest (>= 1.0.0), xml2, 
          dplyr, fs,
          cli,
          ggplot2,

@@ -36,7 +36,7 @@ get_yield_curve <- function(){
   my_html <- rvest::read_html(req$content, encoding = "Latin1")
   my_tab <-  my_html %>%
     html_nodes(xpath = '//*[@id="ETTJs"]/table') %>%
-    html_table(fill = TRUE )
+    html_table()
 
   if (length(my_tab) == 0) {
     cli::cli_abort("Could not find yield curve table on Anbima website.")
