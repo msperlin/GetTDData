@@ -1,3 +1,6 @@
+## Version 1.7.2 (2026-10-13)
+  - added an optional Model Context Protocol (MCP) server that exposes a curated set of package functions (`td_get2()`, `td_get_current()`, `get_yield_curve()`, `get_asset_info()`, `get_td_names()`) as LLM-callable tools via `mcp_server()` and `mcp_tools()`; requires the suggested `mcptools`, `ellmer`, and `jsonlite` packages
+
 ## Version 1.7.1 (2026-09-10)
   - added `td_get2()` to retrieve bond data from the Tesouro Transparente CKAN portal (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto>) with columns matching `td_get()`
   - updated `td_get_current()` to use `td_get2()` and fetch live daily prices without deprecation warnings

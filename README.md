@@ -131,3 +131,41 @@ print(p)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="100%" />
+
+## Using `GetTDData` as an MCP server
+
+Recent versions of `GetTDData` can expose a curated set of its functions as
+[Model Context Protocol](https://modelcontextprotocol.io) (MCP) tools, so AI
+assistants such as OpenCode, Claude Desktop, Claude Code, or Positron Assistant
+can fetch Brazilian bond data on demand.
+
+Install the optional dependencies:
+
+``` r
+install.packages(c("mcptools", "ellmer", "jsonlite"))
+```
+
+The command that starts the server is:
+
+``` sh
+Rscript -e "GetTDData::mcp_server()"
+```
+
+Register it with your MCP client. For example, in OpenCode's `opencode.json`:
+
+``` json
+{
+  "mcp": {
+    "servers": {
+      "GetTDData": {
+        "type": "local",
+        "command": ["Rscript", "-e", "GetTDData::mcp_server()"]
+      }
+    }
+  }
+}
+```
+
+The server exposes `get_td_data`, `get_td_current`, `get_yield_curve`,
+`list_asset_info`, and `list_asset_names`. You can inspect them from R with
+`names(mcp_tools())`.
