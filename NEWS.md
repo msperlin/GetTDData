@@ -7,6 +7,7 @@
   - `td_get2()` asset code validation and filtering now share a single alias map, fixing the misleading list of valid codes in the error message and removing dead filtering code
   - `td_get2()` validates `first_year`/`last_year` and warns when the filters return no rows
   - fixed `td_get()` documentation pointing to an unreleased `td_get2()`
+  - removed the optional MCP server (`mcp_server()`, `mcp_tools()`, and the bundled `inst/mcp/tools.R` definitions) along with the `mcptools`, `ellmer`, and `jsonlite` suggested dependencies
 
 ## Version 1.7.2 (2026-10-13)
   - added an optional Model Context Protocol (MCP) server that exposes a curated set of package functions (`td_get2()`, `td_get_current()`, `get_yield_curve()`, `get_asset_info()`, `get_td_names()`) as LLM-callable tools via `mcp_server()` and `mcp_tools()`; requires the suggested `mcptools`, `ellmer`, and `jsonlite` packages

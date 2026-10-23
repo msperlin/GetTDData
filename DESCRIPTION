@@ -23,8 +23,5 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    covr,
-    ellmer,
-    jsonlite,
-    mcptools
+    covr
 Config/roxygen2/version: 8.1.1
