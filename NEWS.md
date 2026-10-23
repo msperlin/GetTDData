@@ -8,6 +8,7 @@
   - `td_get2()` validates `first_year`/`last_year` and warns when the filters return no rows
   - fixed `td_get()` documentation pointing to an unreleased `td_get2()`
   - removed the optional MCP server (`mcp_server()`, `mcp_tools()`, and the bundled `inst/mcp/tools.R` definitions) along with the `mcptools`, `ellmer`, and `jsonlite` suggested dependencies
+  - all internet-dependent tests now skip on CRAN and when offline (via `testthat::skip_if_offline()` and `testthat::skip_on_cran()`), while still running under `covr`
 
 ## Version 1.7.2 (2026-10-13)
   - added an optional Model Context Protocol (MCP) server that exposes a curated set of package functions (`td_get2()`, `td_get_current()`, `get_yield_curve()`, `get_asset_info()`, `get_td_names()`) as LLM-callable tools via `mcp_server()` and `mcp_tools()`; requires the suggested `mcptools`, `ellmer`, and `jsonlite` packages

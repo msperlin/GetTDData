@@ -22,6 +22,11 @@ make_one_bond_csv <- function(yield) {
 }
 
 test_that("td_get2() works with local CSV file and has matching columns", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   tmp_csv <- tempfile(fileext = ".csv")
   cat(
     "Tipo Titulo;Data Vencimento;Data Base;Taxa Compra Manha;Taxa Venda Manha;PU Compra Manha;PU Venda Manha;PU Base Manha\n",
@@ -77,6 +82,11 @@ test_that("td_get2() works with local CSV file and has matching columns", {
 })
 
 test_that("td_get2() validates input arguments", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   # Invalid asset code
   expect_error(td_get2("NOT_A_BOND"), "Input asset_codes not valid")
 
@@ -101,6 +111,7 @@ test_that("td_get2() validates input arguments", {
 })
 
 test_that("td_get2() column names match td_get() output", {
+
   if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
@@ -130,6 +141,11 @@ test_that("td_get2() retrieves multiple assets", {
 })
 
 test_that("td_get2() rejects corrupt and empty data files instead of caching them", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   tmp_dl <- tempfile(pattern = "cache_")
   on.exit(unlink(tmp_dl, recursive = TRUE), add = TRUE)
 
@@ -163,6 +179,11 @@ test_that("td_get2() rejects corrupt and empty data files instead of caching the
 })
 
 test_that("td_get2() does not reuse a cache built from a different source", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   tmp_dl <- tempfile(pattern = "cache_")
   on.exit(unlink(tmp_dl, recursive = TRUE), add = TRUE)
 
@@ -179,6 +200,11 @@ test_that("td_get2() does not reuse a cache built from a different source", {
 })
 
 test_that("td_get2() rebuilds from an already validated CSV without fetching it again", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   tmp_dl <- tempfile(pattern = "cache_")
   on.exit(unlink(tmp_dl, recursive = TRUE), add = TRUE)
 
@@ -198,6 +224,11 @@ test_that("td_get2() rebuilds from an already validated CSV without fetching it 
 })
 
 test_that("td_get2() falls back to cached data when a forced refresh fails", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   skip_if_not_installed("testthat", "3.1.5")
 
   tmp_dl <- tempfile(pattern = "cache_")
@@ -226,6 +257,11 @@ test_that("td_get2() falls back to cached data when a forced refresh fails", {
 })
 
 test_that("td_get2() maps every accepted asset code alias", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   tmp_dl <- tempfile(pattern = "cache_")
   on.exit(unlink(tmp_dl, recursive = TRUE), add = TRUE)
 
@@ -280,6 +316,11 @@ test_that("td_get2() maps every accepted asset code alias", {
 })
 
 test_that("td_get2() validates year inputs", {
+  if (!(requireNamespace("covr", quietly = TRUE) && covr::in_covr())) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
+
   expect_error(td_get2("LTN", first_year = NA), "must be a single whole number")
   expect_error(td_get2("LTN", last_year = "not-a-year"), "must be a single whole number")
   expect_error(td_get2("LTN", first_year = c(2020, 2021)), "must be a single whole number")
