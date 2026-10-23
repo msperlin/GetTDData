@@ -34,6 +34,9 @@
   [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
   documentation pointing to an unreleased
   [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+- removed the optional MCP server (`mcp_server()`, `mcp_tools()`, and
+  the bundled `inst/mcp/tools.R` definitions) along with the `mcptools`,
+  `ellmer`, and `jsonlite` suggested dependencies
 
 ## Version 1.7.2 (2026-10-13)
 
@@ -44,11 +47,8 @@
   [`get_yield_curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md),
   [`get_asset_info()`](https://msperlin.github.io/GetTDData/reference/get_asset_info.md),
   [`get_td_names()`](https://msperlin.github.io/GetTDData/reference/get_td_names.md))
-  as LLM-callable tools via
-  [`mcp_server()`](https://msperlin.github.io/GetTDData/reference/mcp_server.md)
-  and
-  [`mcp_tools()`](https://msperlin.github.io/GetTDData/reference/mcp_tools.md);
-  requires the suggested `mcptools`, `ellmer`, and `jsonlite` packages
+  as LLM-callable tools via `mcp_server()` and `mcp_tools()`; requires
+  the suggested `mcptools`, `ellmer`, and `jsonlite` packages
 
 ## Version 1.7.1 (2026-09-10)
 

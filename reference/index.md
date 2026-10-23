@@ -11,10 +11,6 @@
 - [`get_yield_curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md)
   [`get.yield.curve()`](https://msperlin.github.io/GetTDData/reference/get_yield_curve.md)
   : Gets the current yield curve
-- [`mcp_server()`](https://msperlin.github.io/GetTDData/reference/mcp_server.md)
-  : Run a GetTDData MCP server
-- [`mcp_tools()`](https://msperlin.github.io/GetTDData/reference/mcp_tools.md)
-  : Build the Model Context Protocol (MCP) tools exposed by GetTDData
 - [`plot_td_series()`](https://msperlin.github.io/GetTDData/reference/plot_td_series.md)
   : Plot Tesouro Direto Time Series Data
 - [`plot_yield_curve()`](https://msperlin.github.io/GetTDData/reference/plot_yield_curve.md)
