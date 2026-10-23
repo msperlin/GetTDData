@@ -37,6 +37,11 @@
 - removed the optional MCP server (`mcp_server()`, `mcp_tools()`, and
   the bundled `inst/mcp/tools.R` definitions) along with the `mcptools`,
   `ellmer`, and `jsonlite` suggested dependencies
+- all internet-dependent tests now skip on CRAN and when offline (via
+  [`testthat::skip_if_offline()`](https://testthat.r-lib.org/reference/skip.html)
+  and
+  [`testthat::skip_on_cran()`](https://testthat.r-lib.org/reference/skip.html)),
+  while still running under `covr`
 
 ## Version 1.7.2 (2026-10-13)
 

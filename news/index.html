@@ -50,6 +50,8 @@
 <li>fixed <code><a href="../reference/td_get.html">td_get()</a></code> documentation pointing to an unreleased <code><a href="../reference/td_get2.html">td_get2()</a></code>
 </li>
 <li>removed the optional MCP server (<code>mcp_server()</code>, <code>mcp_tools()</code>, and the bundled <code>inst/mcp/tools.R</code> definitions) along with the <code>mcptools</code>, <code>ellmer</code>, and <code>jsonlite</code> suggested dependencies</li>
+<li>all internet-dependent tests now skip on CRAN and when offline (via <code><a href="https://testthat.r-lib.org/reference/skip.html" class="external-link">testthat::skip_if_offline()</a></code> and <code><a href="https://testthat.r-lib.org/reference/skip.html" class="external-link">testthat::skip_on_cran()</a></code>), while still running under <code>covr</code>
+</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.7.2" id="version-172-2026-10-13">Version 1.7.2 (2026-10-13)<a class="anchor" aria-label="anchor" href="#version-172-2026-10-13"></a></h2>
