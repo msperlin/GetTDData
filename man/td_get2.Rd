@@ -27,9 +27,11 @@ If `NULL`, downloads all available assets. Defaults to 'LTN'.}
 Defaults to \code{\link{get_cache_folder}()}.}
 
 \item{force_download}{Logical. If `TRUE`, forces redownloading the data even if
-a cached version from today is present. Defaults to `FALSE`.}
+a cached version from today is present. If the download fails, the existing
+cache is used as a fallback. Defaults to `FALSE`.}
 
-\item{dataset_url}{The URL to the CKAN dataset page or direct CSV file. Defaults to
+\item{dataset_url}{The URL to the CKAN dataset page, a direct CSV file link, or
+the path to a local CSV file with the same layout. Defaults to
 "https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/".}
 }
 \value{
@@ -48,6 +50,13 @@ directly from the Tesouro Transparente CKAN open data portal
 (<https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/>).
 It serves as the modern replacement for \code{\link{td_get}}, which relied on the
 legacy Tesouro Direto application shut down in August 2026.
+}
+\details{
+The downloaded file is validated before it replaces any cached copy: error
+pages and incomplete downloads are rejected instead of being silently parsed
+as an empty data set. Parsed data is cached in \code{dl_folder} as an RDS
+file for the rest of the day. The cache is only reused when it was produced
+from the same \code{dataset_url}.
 }
 \examples{
 \dontrun{

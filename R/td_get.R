@@ -9,7 +9,8 @@
 #'
 #' Due to the closure of the Tesouro Direto data application in August 2026,
 #' `td_get()` is deprecated and resulting data will only go as far as August 2026.
-#' Users should use `td_get2()`, a new function that will be developed soon.
+#' Users should use \code{\link{td_get2}}, which retrieves the same data from the
+#' Tesouro Transparente CKAN portal.
 #'
 #' @param asset_codes A character vector identifying the assets (one or more) in the
 #'   names of the Excel files (e.g., 'LTN'). If `NULL`, downloads all available assets.

@@ -1,3 +1,13 @@
+## Version 1.7.2.9000 (development version)
+  - hardened `td_get2()`: downloaded/local CSV files are now validated (header and content) before replacing the cache, so HTML error pages, rate-limit responses and truncated downloads raise a clear error instead of silently returning (and caching) an empty data set
+  - `td_get2()` cache is now tagged with its data source and format version; a cache produced from a different `dataset_url` is no longer reused
+  - `td_get2()` reuses an already validated CSV from the same day instead of downloading it again, and falls back to the cached data (instead of erroring) when `force_download = TRUE` fails
+  - `td_get2()` now retries downloads (3 attempts with backoff) and sends a package user agent, mitigating intermittent 429/connection reset errors from the portal
+  - `td_get2()` no longer silently falls back to the default CKAN resource when an arbitrary `dataset_url` cannot be resolved; the fallback is restricted to the Tesouro Transparente portal and emits a warning
+  - `td_get2()` asset code validation and filtering now share a single alias map, fixing the misleading list of valid codes in the error message and removing dead filtering code
+  - `td_get2()` validates `first_year`/`last_year` and warns when the filters return no rows
+  - fixed `td_get()` documentation pointing to an unreleased `td_get2()`
+
 ## Version 1.7.2 (2026-10-13)
   - added an optional Model Context Protocol (MCP) server that exposes a curated set of package functions (`td_get2()`, `td_get_current()`, `get_yield_curve()`, `get_asset_info()`, `get_td_names()`) as LLM-callable tools via `mcp_server()` and `mcp_tools()`; requires the suggested `mcptools`, `ellmer`, and `jsonlite` packages
 
