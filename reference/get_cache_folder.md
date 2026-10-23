@@ -25,5 +25,5 @@ A character string representing the folder path.
 
 ``` r
 get_cache_folder()
-#> /tmp/RtmpZWU3Un/td-files
+#> /tmp/RtmpHj4kEg/td-files
 ```
