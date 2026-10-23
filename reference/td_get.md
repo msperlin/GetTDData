@@ -50,8 +50,9 @@ containing prices and yields of government bonds. You can use the input
 
 Due to the closure of the Tesouro Direto data application in August
 2026, \`td_get()\` is deprecated and resulting data will only go as far
-as August 2026. Users should use \`td_get2()\`, a new function that will
-be developed soon.
+as August 2026. Users should use
+[`td_get2`](https://msperlin.github.io/GetTDData/reference/td_get2.md),
+which retrieves the same data from the Tesouro Transparente CKAN portal.
 
 ## Examples
 

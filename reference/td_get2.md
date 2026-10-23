@@ -49,11 +49,13 @@ td_get2(
 - force_download:
 
   Logical. If \`TRUE\`, forces redownloading the data even if a cached
-  version from today is present. Defaults to \`FALSE\`.
+  version from today is present. If the download fails, the existing
+  cache is used as a fallback. Defaults to \`FALSE\`.
 
 - dataset_url:
 
-  The URL to the CKAN dataset page or direct CSV file. Defaults to
+  The URL to the CKAN dataset page, a direct CSV file link, or the path
+  to a local CSV file with the same layout. Defaults to
   "https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/".
 
 ## Value
@@ -80,6 +82,14 @@ A `tibble` (data frame) containing the asset data:
 - matur_date:
 
   Maturity date of the bond (Date)
+
+## Details
+
+The downloaded file is validated before it replaces any cached copy:
+error pages and incomplete downloads are rejected instead of being
+silently parsed as an empty data set. Parsed data is cached in
+`dl_folder` as an RDS file for the rest of the day. The cache is only
+reused when it was produced from the same `dataset_url`.
 
 ## Examples
 

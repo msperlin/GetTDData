@@ -1,5 +1,40 @@
 # Changelog
 
+## Version 1.7.2.9000 (development version)
+
+- hardened
+  [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md):
+  downloaded/local CSV files are now validated (header and content)
+  before replacing the cache, so HTML error pages, rate-limit responses
+  and truncated downloads raise a clear error instead of silently
+  returning (and caching) an empty data set
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  cache is now tagged with its data source and format version; a cache
+  produced from a different `dataset_url` is no longer reused
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  reuses an already validated CSV from the same day instead of
+  downloading it again, and falls back to the cached data (instead of
+  erroring) when `force_download = TRUE` fails
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  now retries downloads (3 attempts with backoff) and sends a package
+  user agent, mitigating intermittent 429/connection reset errors from
+  the portal
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  no longer silently falls back to the default CKAN resource when an
+  arbitrary `dataset_url` cannot be resolved; the fallback is restricted
+  to the Tesouro Transparente portal and emits a warning
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  asset code validation and filtering now share a single alias map,
+  fixing the misleading list of valid codes in the error message and
+  removing dead filtering code
+- [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+  validates `first_year`/`last_year` and warns when the filters return
+  no rows
+- fixed
+  [`td_get()`](https://msperlin.github.io/GetTDData/reference/td_get.md)
+  documentation pointing to an unreleased
+  [`td_get2()`](https://msperlin.github.io/GetTDData/reference/td_get2.md)
+
 ## Version 1.7.2 (2026-10-13)
 
 - added an optional Model Context Protocol (MCP) server that exposes a

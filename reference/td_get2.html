@@ -87,11 +87,13 @@ Defaults to <code><a href="get_cache_folder.html">get_cache_folder()</a></code>.
 
 <dt id="arg-force-download">force_download<a class="anchor" aria-label="anchor" href="#arg-force-download"></a></dt>
 <dd><p>Logical. If `TRUE`, forces redownloading the data even if
-a cached version from today is present. Defaults to `FALSE`.</p></dd>
+a cached version from today is present. If the download fails, the existing
+cache is used as a fallback. Defaults to `FALSE`.</p></dd>
 
 
 <dt id="arg-dataset-url">dataset_url<a class="anchor" aria-label="anchor" href="#arg-dataset-url"></a></dt>
-<dd><p>The URL to the CKAN dataset page or direct CSV file. Defaults to
+<dd><p>The URL to the CKAN dataset page, a direct CSV file link, or
+the path to a local CSV file with the same layout. Defaults to
 "https://www.tesourotransparente.gov.br/ckan/dataset/taxas-dos-titulos-ofertados-pelo-tesouro-direto/".</p></dd>
 
 </dl></div>
@@ -114,6 +116,14 @@ a cached version from today is present. Defaults to `FALSE`.</p></dd>
 
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The downloaded file is validated before it replaces any cached copy: error
+pages and incomplete downloads are rejected instead of being silently parsed
+as an empty data set. Parsed data is cached in <code>dl_folder</code> as an RDS
+file for the rest of the day. The cache is only reused when it was produced
+from the same <code>dataset_url</code>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

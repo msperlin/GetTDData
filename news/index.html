@@ -33,6 +33,24 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.7.2.9000" id="version-1729000-development-version">Version 1.7.2.9000 (development version)<a class="anchor" aria-label="anchor" href="#version-1729000-development-version"></a></h2>
+<ul><li>hardened <code><a href="../reference/td_get2.html">td_get2()</a></code>: downloaded/local CSV files are now validated (header and content) before replacing the cache, so HTML error pages, rate-limit responses and truncated downloads raise a clear error instead of silently returning (and caching) an empty data set</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> cache is now tagged with its data source and format version; a cache produced from a different <code>dataset_url</code> is no longer reused</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> reuses an already validated CSV from the same day instead of downloading it again, and falls back to the cached data (instead of erroring) when <code>force_download = TRUE</code> fails</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> now retries downloads (3 attempts with backoff) and sends a package user agent, mitigating intermittent 429/connection reset errors from the portal</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> no longer silently falls back to the default CKAN resource when an arbitrary <code>dataset_url</code> cannot be resolved; the fallback is restricted to the Tesouro Transparente portal and emits a warning</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> asset code validation and filtering now share a single alias map, fixing the misleading list of valid codes in the error message and removing dead filtering code</li>
+<li>
+<code><a href="../reference/td_get2.html">td_get2()</a></code> validates <code>first_year</code>/<code>last_year</code> and warns when the filters return no rows</li>
+<li>fixed <code><a href="../reference/td_get.html">td_get()</a></code> documentation pointing to an unreleased <code><a href="../reference/td_get2.html">td_get2()</a></code>
+</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.7.2" id="version-172-2026-10-13">Version 1.7.2 (2026-10-13)<a class="anchor" aria-label="anchor" href="#version-172-2026-10-13"></a></h2>
 <ul><li>added an optional Model Context Protocol (MCP) server that exposes a curated set of package functions (<code><a href="../reference/td_get2.html">td_get2()</a></code>, <code><a href="../reference/td_get_current.html">td_get_current()</a></code>, <code><a href="../reference/get_yield_curve.html">get_yield_curve()</a></code>, <code><a href="../reference/get_asset_info.html">get_asset_info()</a></code>, <code><a href="../reference/get_td_names.html">get_td_names()</a></code>) as LLM-callable tools via <code><a href="../reference/mcp_server.html">mcp_server()</a></code> and <code><a href="../reference/mcp_tools.html">mcp_tools()</a></code>; requires the suggested <code>mcptools</code>, <code>ellmer</code>, and <code>jsonlite</code> packages</li>
 </ul></div>
